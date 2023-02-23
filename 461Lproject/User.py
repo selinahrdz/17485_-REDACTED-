@@ -45,7 +45,7 @@ class User:
         client = MongoClient(
             "mongodb+srv://guest:NewPassword123+@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
         db = client.Users
-        posts = db.User
+        posts = db.createColloction(self.__userid)
         # print(collection)
         post = {"Username": self.__username,
                 "Encrypted Password": self.__password,

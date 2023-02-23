@@ -4,18 +4,17 @@ from pymongo import MongoClient
 class HWSet:
 
     def __init__(self):
+        self.__id = ""
         self.__description = ""
         self.__capacity = 0
         self.__availability = 0
         self.__checked_out = 0
 
-    def initialize_capacity(self, qty):
+    def initialize(self, idName, desc, qty):
+        self.__id = idName
+        self.__description = desc
         self.__capacity = qty
         self.__availability = qty
-        self.update_database()
-
-    def set_description(self, desc):
-        self.__description = desc
         self.update_database()
 
     def get_availability(self):
@@ -48,7 +47,7 @@ class HWSet:
         client = MongoClient(
             "mongodb+srv://guest:NewPassword123+@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
         db = client.HardwareSet
-        posts = db.HWSet1
+        posts = db.createCollection(self.__id)
         # print(collection)
         post = {"Description": self.__description,
                 "Capacity": self.__capacity,

@@ -35,7 +35,7 @@ class Project:
         client = MongoClient(
             "mongodb+srv://guest:NewPassword123+@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
         db = client.Projects
-        posts = db.Project
+        posts = db.createCollection(self.__id)
         # print(collection)
         post = {"Name": self.__name,
                 "Description": self.__description,
