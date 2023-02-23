@@ -13,6 +13,7 @@ class Project:
         self.__name = pname
         self.__description = pdesc
         self.__id = pid
+        self.update_database()
 
     def get_name(self):
         return self.__name
@@ -23,10 +24,14 @@ class Project:
     def get_id(self):
         return self.__id
 
+    def get_users(self):
+        return self.__users
+
     def add_user(self, newUser):
         self.__users.append(newUser)
+        self.update_database()
 
-    def send_to_database(self):
+    def update_database(self):
         client = MongoClient(
             "mongodb+srv://guest:NewPassword123+@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
         db = client.Projects

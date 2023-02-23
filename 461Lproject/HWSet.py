@@ -12,9 +12,11 @@ class HWSet:
     def initialize_capacity(self, qty):
         self.__capacity = qty
         self.__availability = qty
+        self.update_database()
 
     def set_description(self, desc):
         self.__description = desc
+        self.update_database()
 
     def get_availability(self):
         return self.__availability
@@ -42,7 +44,7 @@ class HWSet:
     def set_capacity(self, qty):
         self.__capacity = qty
 
-    def send_to_database(self):
+    def update_database(self):
         client = MongoClient(
             "mongodb+srv://guest:NewPassword123+@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
         db = client.HardwareSet

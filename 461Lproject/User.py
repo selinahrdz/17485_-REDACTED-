@@ -11,35 +11,37 @@ class User:
 
     def initialize_user(self, name, passw, id):
         self.__username = name
-        self.__password = passw
+        self.__password = self.encrypt(passw)
         self.__userid = id
+        self.update_database()
 
-    def encrypt(self):
+    def encrypt(self, passw):
         encrypt = ""
-        for char in self.__password:
+        for char in passw:
             newC = char
             if ord(newC) - 13 < 34:
                 newC = chr(127 - (34 - (ord(newC) - 13)))
             else:
                 newC = chr(ord(char) - 13)
             encrypt += newC
-        self.__password = encrypt[::-1]
+        return encrypt[::-1]
 
     def decrypt(self):
         decrypt = ""
         for char in self.__password:
             newC = char
-            if ord(newC) - 13 < 34:
-                newC = chr(127 - (34 - (ord(newC) - 13)))
+            if ord(newC) + 13 > 126:
+                newC = chr(33 + ord(newC) - 126 + 13)
             else:
-                newC = chr(ord(char) - 13)
+                newC = chr(ord(char) + 13)
             decrypt += newC
-        self.__password = decrypt[::-1]
+        return decrypt[::-1]
 
     def add_project(self, newProject):
         self.__projects.append(newProject)
+        self.update_database()
 
-    def send_to_database(self):
+    def update_database(self):
         client = MongoClient(
             "mongodb+srv://guest:NewPassword123+@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
         db = client.Users
