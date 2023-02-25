@@ -2,6 +2,8 @@ from pymongo import MongoClient
 import certifi
 
 ca = certifi.where()
+
+
 class User:
 
     def __init__(self):
@@ -13,6 +15,12 @@ class User:
     def initialize_user(self, name, passw, id):
         self.__username = name
         self.__password = self.encrypt(passw)
+        self.__userid = id
+        self.update_database()
+
+    def old_user(self, name, passw, id):
+        self.__username = name
+        self.__password = passw
         self.__userid = id
         self.update_database()
 
@@ -48,6 +56,7 @@ class User:
         db = client["Users"]
         collection_name = self.__userid
         collection = db[collection_name]
+        collection.drop()
         # print(collection)
         user = {"Username": self.__username,
                 "Encrypted Password": self.__password,

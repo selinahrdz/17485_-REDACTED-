@@ -37,6 +37,7 @@ class Project:
         db = client["Projects"]
         collection_name = self.__id
         collection = db[collection_name]
+        collection.drop()
         project = {"Name": self.__name,
                    "Description": self.__description,
                    "Project ID": self.__id,

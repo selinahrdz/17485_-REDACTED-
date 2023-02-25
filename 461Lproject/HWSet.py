@@ -51,6 +51,7 @@ class HWSet:
         db = client["HardwareSets"]
         collection_name = self.__id
         collection = db[collection_name]
+        collection.drop()
         hardwareSet = {"Description": self.__description,
                 "Capacity": self.__capacity,
                 "Availability": self.__availability,
