@@ -1,6 +1,7 @@
 from pymongo import MongoClient
+import certifi
 
-
+ca = certifi.where()
 class User:
 
     def __init__(self):
@@ -43,14 +44,15 @@ class User:
 
     def update_database(self):
         client = MongoClient(
-            "mongodb+srv://guest:NewPassword123+@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
-        db = client.Users
-        posts = db.createColloction(self.__userid)
+            "mongodb+srv://test:test@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
+        db = client["Users"]
+        collection_name = self.__userid
+        collection = db[collection_name]
         # print(collection)
-        post = {"Username": self.__username,
+        user = {"Username": self.__username,
                 "Encrypted Password": self.__password,
                 "UserID": self.__userid,
                 "Available Projects": self.__projects
                 }
-        post_id = posts.insert_one(post).inserted_id
-        print(post)
+        collection.insert_one(user)
+        client.close()

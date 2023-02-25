@@ -33,16 +33,14 @@ class Project:
 
     def update_database(self):
         client = MongoClient(
-            "mongodb+srv://guest:NewPassword123+@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
-        db = client.Projects
-        posts = db.createCollection(self.__id)
-        # print(collection)
-        post = {"Name": self.__name,
-                "Description": self.__description,
-                "Project ID": self.__id,
-                "Available Users": self.__users
-                }
-        post_id = posts.insert_one(post).inserted_id
-        print(post)
-
-
+            "mongodb+srv://test:test@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
+        db = client["Projects"]
+        collection_name = self.__id
+        collection = db[collection_name]
+        project = {"Name": self.__name,
+                   "Description": self.__description,
+                   "Project ID": self.__id,
+                   "Available Users": self.__users
+                   }
+        collection.insert_one(project)
+        client.close()
