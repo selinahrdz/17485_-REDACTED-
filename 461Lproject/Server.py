@@ -3,7 +3,7 @@ import User
 import Project
 import HWSet
 from flask import Flask
-import json
+import jsonpickle
 
 app = Flask(__name__)
 
@@ -25,9 +25,9 @@ def users():
     userId = userId1["UserID"]
     projects = collection.find_one({}, {"Available Projects": 1})
     newUser = User.User()
-    print(name)
     newUser.old_user(name, password, userId)
-    return {json.dumps(newUser.__dict__)}
+    print(jsonpickle.encode(newUser))
+    return {"data: "[jsonpickle.encode(newUser)]}
 
 
 if __name__ == "__main__":
