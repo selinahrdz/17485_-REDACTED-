@@ -65,3 +65,5 @@ class User:
                 }
         collection.insert_one(user)
         client.close()
+
+
