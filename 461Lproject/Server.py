@@ -9,6 +9,9 @@ app = Flask(__name__)
 
 curName = ""
 
+# @app.route("/login")
+# @app.route("/newuser")
+
 
 @app.route("/users")
 def users():

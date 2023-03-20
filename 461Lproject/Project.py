@@ -3,12 +3,14 @@ from pymongo import MongoClient
 
 class Project:
 
+    # Constructor for Project Class, initialized as empty
     def __init__(self):
         self.__name = ""
         self.__description = ""
         self.__id = 0
         self.__users = []
 
+    # Adds data to empty Project object
     def initialize_project(self, pname, pdesc, pid):
         self.__name = pname
         self.__description = pdesc
@@ -27,10 +29,12 @@ class Project:
     def get_users(self):
         return self.__users
 
+    # adding a user to a project
     def add_user(self, newUser):
         self.__users.append(newUser)
         self.update_database()
 
+    # updates the databases
     def update_database(self):
         client = MongoClient(
             "mongodb+srv://test:test@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")

@@ -6,12 +6,14 @@ ca = certifi.where()
 
 class User:
 
+    # Constructor for User Class, creates the obj, every attribute is empty
     def __init__(self):
         self.__username = ""
         self.__password = ""
         self.__userid = ""
         self.__projects = []
 
+    # Adds the data to the User object
     def initialize_user(self, name, passw, id):
         self.__username = name
         self.__password = self.encrypt(passw)
@@ -24,6 +26,7 @@ class User:
         self.__userid = id
         self.update_database()
 
+    # Encryption/Decryption for password
     def encrypt(self, passw):
         encrypt = ""
         for char in passw:
@@ -46,10 +49,12 @@ class User:
             decrypt += newC
         return decrypt[::-1]
 
+    # Adds a new project that the user is in
     def add_project(self, newProject):
         self.__projects.append(newProject)
         self.update_database()
 
+    # Calls Calls Database to update the data
     def update_database(self):
         client = MongoClient(
             "mongodb+srv://test:test@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
@@ -65,5 +70,3 @@ class User:
                 }
         collection.insert_one(user)
         client.close()
-
-
