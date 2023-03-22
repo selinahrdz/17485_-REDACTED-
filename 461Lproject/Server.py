@@ -2,6 +2,7 @@ from pymongo import MongoClient
 import User
 import Project
 import HWSet
+import Driver
 from flask import Flask
 import json
 
@@ -12,27 +13,15 @@ curName = ""
 # @app.route("/login")
 # @app.route("/newuser")
 
+test = Driver.Driver()
 
-@app.route("/users")
+
+@app.route("/login")
 def users():
-    try:
-        client = MongoClient(
-            "mongodb+srv://test:test@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
-        db = client["Users"]
-        nameID = "newUser13"
-        collection = db[nameID]
-        userData = collection.find_one()
-        name = userData["Username"]
-        password = userData["Encrypted Password"]
-        userId = userData["UserID"]
-        projects = userData["Available Projects"]
-        newUser = User.User()
-        newUser.old_user(name, password, userId)
-        userString = json.dumps(newUser.__dict__)
-        print(userString)
-        return userString
-    except:
-        return "Error"
+    test.setUser("newUser123")
+    test.setPassword("goodPassword")
+    return test.getLogin()
+
 
 
 # @app.route("/projects")
