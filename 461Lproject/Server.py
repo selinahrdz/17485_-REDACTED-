@@ -12,16 +12,29 @@ curName = ""
 
 # @app.route("/login")
 # @app.route("/newuser")
+user = Driver.Driver()
+set1 = HWSet.HWSet()
+set2 = HWSet.HWSet()
+set1.initialize("set1", 100)
+set2.initialize("set2", 100)
 
-test = Driver.Driver()
+
+@app.route("/login/<username>/<password>", methods=['GET'])
+def users(username, password):
+    user.setUser(username, password)
+    return user.getLogin()
 
 
-@app.route("/login")
-def users():
-    test.setUser("newUser123")
-    test.setPassword("goodPassword")
-    return test.getLogin()
+@app.route("/project/<projectID>", methods=['GET'])
+def addProj(projectID):
+    user.setProjectID(projectID)
+    user.addUser()
 
+
+@app.route("/checkIn/<projectID>/<HWset>/<qty>", methods=['GET'])
+def checkIn(projectID, HWSet, password):
+    if user.doesExist(projectID):
+        if(set1.get)
 
 
 # @app.route("/projects")

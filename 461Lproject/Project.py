@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-
+import HWSet
 
 class Project:
 
@@ -15,6 +15,13 @@ class Project:
         self.__name = pname
         self.__description = pdesc
         self.__id = pid
+        self.update_database()
+
+    def renew_project(self, pname, pdesc, pid, newUsers):
+        self.__name = pname
+        self.__description = pdesc
+        self.__id = pid
+        self.__users = newUsers
         self.update_database()
 
     def get_name(self):

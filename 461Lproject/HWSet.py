@@ -4,15 +4,13 @@ from pymongo import MongoClient
 class HWSet:
 
     def __init__(self):
-        self.__id = ""
-        self.__description = ""
+        self.__name = ""
         self.__capacity = 0
         self.__availability = 0
         self.__checked_out = 0
 
-    def initialize(self, idName, desc, qty):
-        self.__id = idName
-        self.__description = desc
+    def initialize(self, thisName, qty):
+        self.__name = thisName
         self.__capacity = qty
         self.__availability = qty
         self.update_database()
@@ -52,7 +50,7 @@ class HWSet:
         collection_name = self.__id
         collection = db[collection_name]
         collection.drop()
-        hardwareSet = {"Description": self.__description,
+        hardwareSet = {
                 "Capacity": self.__capacity,
                 "Availability": self.__availability,
                 }
