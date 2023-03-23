@@ -10,6 +10,7 @@ class Driver:
         self.__user = ""
         self.__password = ""
         self.__projectID = ""
+        self.__checkedOut = [0, 0]
 
     def setUser(self, name, passw):
         self.__user = name
@@ -67,3 +68,9 @@ class Driver:
                 return "false"
         except:
             return "Error"
+
+    def getSetOne(self):
+        return self.__checkedOut[0]
+
+    def getSetTwo(self):
+        return self.__checkedOut[1]
