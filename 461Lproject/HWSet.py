@@ -15,6 +15,12 @@ class HWSet:
         self.__availability = qty
         self.update_database()
 
+    def update(self, thisName, qtyCap, qtyAval):
+        self.__name = thisName
+        self.__capacity = qtyCap
+        self.__availability = qtyAval
+        self.update_database()
+
     def getAvailability(self):
         return self.__availability
 
@@ -43,6 +49,7 @@ class HWSet:
         else:
             self.__availability = self.__capacity
             self.__checked_out = 0
+        self.update_database()
         return self.__availability
 
     def get_checkedout_qty(self):
@@ -50,6 +57,7 @@ class HWSet:
 
     def set_capacity(self, qty):
         self.__capacity = qty
+        self.update_database()
 
     def update_database(self):
         client = MongoClient(
@@ -59,6 +67,7 @@ class HWSet:
         collection = db[collection_name]
         collection.drop()
         hardwareSet = {
+                "Name": self.__name,
                 "Capacity": self.__capacity,
                 "Availability": self.__availability,
                 }

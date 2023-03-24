@@ -8,8 +8,6 @@ import json
 
 app = Flask(__name__)
 
-curName = ""
-
 # @app.route("/login")
 # @app.route("/newuser")
 user = Driver.Driver()
@@ -34,11 +32,12 @@ def addProj(projectID):
 #Not finished, will eventually return integer value of <HWSet> availability
 @app.route("/checkIn/<projectID>/<HWSet>/<qty>", methods=['GET'])
 def checkIn(projectID, HWSet, qty):
-    if user.doesExist(projectID):
-        if set1.getName() == HWSet:
-            if user.getSetOne() - qty > 0:
-                if()
-                return set1.checkIn(qty)
+    try:
+        if user.doesExist(projectID) == "true":
+            newSet = user.getSet(HWSet)
+                if newSet.getName() == "set1":
+                    if user.hasEnough(1, qty) == true:
+                        user.setCheckedIn()
 
 #Not finished, will eventually return integer value of <HWSet> availability
 @app.route("/checkOut/<projectID>/<HWset>/<qty>", methods=['GET'])
@@ -55,6 +54,7 @@ def createUser(username, password, userID):
     newUser = User.User
     newUser.initialize_user(username, password, userID)
     user.setUser(username, password)
+    user.setTrueUser(newUser)
 
 
 
