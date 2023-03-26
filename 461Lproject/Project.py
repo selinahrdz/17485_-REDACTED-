@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 import HWSet
 
+
 class Project:
 
     # Constructor for Project Class, initialized as empty

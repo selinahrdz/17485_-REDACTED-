@@ -67,10 +67,9 @@ class HWSet:
         collection = db[collection_name]
         collection.drop()
         hardwareSet = {
-                "Name": self.__name,
-                "Capacity": self.__capacity,
-                "Availability": self.__availability,
-                }
+            "Name": self.__name,
+            "Capacity": self.__capacity,
+            "Availability": self.__availability,
+        }
         collection.insert_one(hardwareSet)
         client.close()
-

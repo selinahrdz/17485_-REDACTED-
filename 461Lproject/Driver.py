@@ -69,7 +69,8 @@ class Driver:
             projUsers = project["Available Users"]
             projUsers.append(self.__username)
             newProj = Project.Project()
-            newProj.renew_project(projName, projDesc, self.__projectID, projUsers)
+            newProj.renew_project(projName, projDesc,
+                                  self.__projectID, projUsers)
         except:
             return "Error"
 
