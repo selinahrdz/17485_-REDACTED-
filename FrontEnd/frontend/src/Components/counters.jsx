@@ -11,6 +11,7 @@ class Counters extends Component {
         >
           Check All Hardware Sets In
         </button>
+        <button className="btn btn-primary btn-sm m-2">Create/Join</button>
 
         {this.props.counters.map((counter) => (
           <Counter

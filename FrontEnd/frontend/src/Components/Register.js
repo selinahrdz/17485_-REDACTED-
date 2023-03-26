@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const Login = () => {
+export const Register = (props) => {
   const [username, setuserName] = useState("");
   const [userid, setid] = useState(""); //updates email
   const [password, SetPass] = useState("");
@@ -10,32 +10,40 @@ export const Login = () => {
     console.log(username);
   };
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <label for="username">userName</label>
+    <div className="auth-form-container">
+      <h2>Register</h2>
+      <form className="register-form" onSubmit={handleSubmit}>
+        <label htmlfor="username">userName</label>
         <input
           value={username}
           onChange={(e) => setuserName(e.target.value)}
           type="username"
           placeholder="yourusername"
         />
-        <label for="userid">userName</label>
+        <label htmlfor="userid">userID</label>
         <input
           value={userid}
           onChange={(e) => setid(e.target.value)}
           type="userid"
           placeholder="youruserid"
         />
-        <label for="password">password</label>
+        <label htmlfor="password">password</label>
         <input
           value={password}
           onChange={(e) => SetPass(e.target.value)}
-          type="username"
+          type="password"
           placeholder="*******"
         />
-        <button type="submit">Log In</button>
+        <button className="register-btn" type="submit">
+          Sign Up
+        </button>
       </form>
-      <button> New User?</button>
-    </>
+      <button
+        className="link-button"
+        onClick={() => props.onFormSwitch("login")}
+      >
+        Already have an account? Login Here
+      </button>
+    </div>
   );
 };

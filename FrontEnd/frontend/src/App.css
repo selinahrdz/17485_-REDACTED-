@@ -1,0 +1,62 @@
+.App {
+  text-align: center;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-image:  linear-gradient(to left, #80FFDB, #5390D9);
+}
+
+.auth-form-container, .login-form , .register-form{
+  display: flex;
+  flex-direction: column;
+  padding: 5rem;
+ 
+}
+.project-form{
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+
+}
+.auth-form-container,.project-container{
+  padding: 5rem;
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+label{
+  text-align: left;
+  padding: 0.20rem 0;
+
+}
+
+input{
+  margin: 0.5rem 0;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+
+}
+
+button{
+  border: none;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+
+}
+
+.link-button{
+  background: none;
+  color: white;
+  text-decoration: underline;
+  
+}
+
+.link,.login-btn,.register-btn{
+  margin-top: 15px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
