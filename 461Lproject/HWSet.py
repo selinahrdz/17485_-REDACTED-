@@ -15,42 +15,59 @@ class HWSet:
         self.__availability = qty
         self.update_database()
 
-    def get_availability(self):
+    def update(self, thisName, qtyCap, qtyAval):
+        self.__name = thisName
+        self.__capacity = qtyCap
+        self.__availability = qtyAval
+        self.update_database()
+
+    def getAvailability(self):
         return self.__availability
 
-    def get_capacity(self):
+    def getCapacity(self):
         return self.__capacity
 
-    def check_out(self, qty):
+    def getName(self):
+        return self.__name
+
+    def checkOut(self, qty):
         if qty > self.__availability:
             self.__checked_out += self.__availability
             self.__availability = 0
             self.update_database()
-            return -1
+            return self.__availability
         else:
-            self.__availability -= qty
-            self.__checked_out += qty
+            self.__availability = 0
+            self.__checked_out = self.__capacity
             self.update_database()
             return 0
 
-    def check_in(self, qty):
-        self.__availability += qty
-        self.__checked_out -= qty
+    def checkIn(self, qty):
+        if self.__availability + qty <= self.__capacity:
+            self.__availability += qty
+            self.__checked_out -= qty
+        else:
+            self.__availability = self.__capacity
+            self.__checked_out = 0
+        self.update_database()
+        return self.__availability
 
     def get_checkedout_qty(self):
         return self.__checked_out
 
     def set_capacity(self, qty):
         self.__capacity = qty
+        self.update_database()
 
     def update_database(self):
         client = MongoClient(
             "mongodb+srv://test:test@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
         db = client["HardwareSets"]
-        collection_name = self.__id
+        collection_name = self.__name
         collection = db[collection_name]
         collection.drop()
         hardwareSet = {
+                "Name": self.__name,
                 "Capacity": self.__capacity,
                 "Availability": self.__availability,
                 }
