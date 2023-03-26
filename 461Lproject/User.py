@@ -12,6 +12,7 @@ class User:
         self.__password = ""
         self.__userid = ""
         self.__projects = []
+        self.__checkedOut = [0, 0]
 
     # Adds the data to the User object
     def initialize_user(self, name, passw, id):
@@ -20,10 +21,12 @@ class User:
         self.__userid = id
         self.update_database()
 
-    def old_user(self, name, passw, id):
+    def old_user(self, name, passw, id, projects, sets):
         self.__username = name
         self.__password = passw
         self.__userid = id
+        self.__projects = projects
+        self.__checkedOut = sets
         self.update_database()
 
     # Encryption/Decryption for password
@@ -54,6 +57,17 @@ class User:
         self.__projects.append(newProject)
         self.update_database()
 
+    def getSetOne(self):
+        return self.__checkedOut[0]
+
+    def getSetTwo(self):
+        return self.__checkedOut[1]
+
+    def hasEnough(self, setNum, qty):
+        if self.__checkedOut[setNum] - qty > 0:
+            return "true"
+        return "false"
+
     # Calls Calls Database to update the data
     def update_database(self):
         client = MongoClient(
@@ -66,7 +80,8 @@ class User:
         user = {"Username": self.__username,
                 "Encrypted Password": self.__password,
                 "UserID": self.__userid,
-                "Available Projects": self.__projects
+                "Available Projects": self.__projects,
+                "Sets": self.__checkedOut
                 }
         collection.insert_one(user)
         client.close()
