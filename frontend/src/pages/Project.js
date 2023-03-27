@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-export const Project = (props) => {
+function Project(props) {
+  const move = useNavigate();
   const [name, setname] = useState("");
   const [description, setdescription] = useState(""); //updates email
   const [projectid, setID] = useState("");
@@ -59,4 +61,4 @@ export const Project = (props) => {
             </button> */}
     </div>
   );
-};
+}
