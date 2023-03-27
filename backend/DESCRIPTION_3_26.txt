@@ -1,0 +1,87 @@
+Last Updated: 3/26/2023
+
+
+DATABASE REWORKING (MongoDB)
+    - Having One Database (Manangement)
+        - Having Three collections (Users, Projects,HWSets )
+            - Users will be made up of ("Username" ,"Password" ,"First_Name" ,"Last_Name", "Projects" (Array) )
+                - Currently thinking of "HWS1_Checked_Out" and "HWS2_Checked_Out" to keep track of HWSets per project for that user
+                - Each Element in the Projects Array of a User Document should have a ProjectName and the auto generated ID
+            - Projects will be made up of ("ProjectName" , "ProjectDescription ,"Authorized_Users" (Array))
+                -For an id we'll use the auto generated id from MongoDB, access used Bson (see Helpers.py)
+
+HELPER FUNCTIONS DESCRIPTION
+    encrypt(passw):
+        - From Users.py
+
+    decrypt(passw):
+        - From Users.py
+
+    sign_in(username, password):
+        Validates the the username password combination
+        Returns Json :
+            'message' : 'Authorized', if correct combination
+            'message' : 'Not Authorized, incorrect Password', if user exist, but wrong password
+            'message' : 'User does not exist', if user does not exist
+
+    sign_up(username, password, first_name, last_name):
+        Create a new user and add to the Database with an empty project Array
+        Returns Json:
+            'message': 'User added.', if the user is added
+            'message': 'Username exists already.', if the username exist already
+
+    project_in_user_projects(project_ID, user_projects):
+        Checks if project_ID is in user_projects
+            Returns:
+                True if it is
+                False if it is not
+
+    get_projects(username):
+        Returns Projects array for username in the session
+        *For Dynamic Front End Presntation of Projects
+
+    join_project(username, project_ID):
+        Adds username to the array of authorized_users of matching project ID
+        Add the project to the array of projects of the user
+
+    join_project_by_id(username, project_ID):
+        Given a project id, will add the user to the project, (add the project for the user)
+        Returns Json:
+            'message':'Project joined.', if successfully joinded
+            'message':'Project does not exist.', if project does not exist
+            'message':'Project ID is invalid.', if the project does not exist (extra protection)
+
+    leave_project(username, project_ID):
+        Removes username to the array of authorized_users of matching project ID
+        Removes the project to the array of projects of the user
+
+    create_project(username, project_name, project_description):
+        Creates a new Project Document in the Database
+        Calls join_project() to add the user to the project
+        Returns Json:
+            'Message': 'Project created.', Once the project is created (as it is right now project can have the same name and description ,could be changed)
+
+SERVER APP ROUTES
+    @app.route("/login", methods=['POST'])
+        - login page, might change to "/" so it is the landing page
+        - Should have FormData with "Username" and "Password" , POST request
+        - Page should have a button leading to "/create-account"
+        - Should notify when Username does not exist, Wrong combination
+   
+   @app.route("/create_account", methods=['POST'])
+        - Should have Input Field for Username, Password, FirstName and Last_Name
+        - FormData should be "Username" , "Password" , "Last_name" , "First_Name" 
+        - Should notify when the username exist already
+
+    @app.route("/my-projects")
+        - Is going to return Json with an Array of Project for that User
+
+    @app.route("/join-project", methods=['POST'])
+        - For a page where you can join using the project id, so FormData "Project_ID"
+
+    @app.route("/leave-project", methods=['POST'])
+        - Should be a Button to leave a project, need FormData "Project_ID"
+
+    @app.route("/create-project", methods=['POST'])
+        - For a page where you can create a project
+        - Need "Project_Name" and "Project_Description"
