@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from bson import ObjectId
-import json, jsonEncoder, certifi
+import json,jsonMaker,certifi
+
 
 
 client = MongoClient("mongodb+srv://test:test@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
@@ -79,12 +80,12 @@ def project_in_user_projects(project_ID, user_projects):
 
 def get_projects(username):
     user_project = user_collection.find_one({'Username':username}) ['Projects']
-    json_user_projects = json.loads(jsonEncoder.MongoJSONEncoder().encode(user_project))
+    json_user_projects = json.loads(jsonMaker.MongoJSONEncoder().encode(user_project))
     user_projects = []
 
     for project in json_user_projects:
         actualProject = project_collection.find_one({'_id':ObjectId(project[1])}) #'_id':ObjectId(project[1] - this is the ID that MongoDB assigs to the project
-        user_projects.append(json.loads(jsonEncoder.MongoJSONEncoder().encode(actualProject)))
+        user_projects.append(json.loads(jsonMaker.MongoJSONEncoder().encode(actualProject)))
     return 
 
 def join_project(username, project_ID):
@@ -132,7 +133,7 @@ def leave_project(username, project_ID):
 
     if username in authorized_users  and username is not None:
         authorized_users.remove(username) #remove the username from the autho user of the project
-        project_collection.update_one({'_id':ObjectId(project_ID)}, {'$set':{'Authorized_Users':authorized_user }})
+        project_collection.update_one({'_id':ObjectId(project_ID)}, {'$set':{'Authorized_Users':authorized_users }})
     if  project_in_user_projects(project_ID, user_projects) and project_leaving is not None:
         user_projects.remove(project_leaving) #remove the project from the project array of the user
         user_collection.update_one({'Username':username}, {'$set':{'Projects':user_projects}})
