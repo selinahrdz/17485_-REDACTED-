@@ -94,7 +94,7 @@ def create_log_on():
     session['username'] = Username
     return response #This is a Json Response
 
-@app.route("/my-projects")
+@app.route("/my_projects")
 def my_projects():
     if 'username' in session:
         username = session['username']
@@ -108,7 +108,7 @@ def my_projects():
 
 # Join a project means - Adding the Project to the user's project array and adding the user to the Authorized users
 #of said Project
-@app.route("/join-project", methods=['POST'])
+@app.route("/join_project", methods=['POST'])
 def join_project():
     response = ''
     if 'username' in session:
@@ -120,7 +120,7 @@ def join_project():
     else:
         return {'status': 'error', 'message': 'Log in or Sign Up',}
     
-@app.route("/leave-project", methods=['POST'])
+@app.route("/leave_project", methods=['POST'])
 def leave_project ():
     response = ''
     if 'username' in session:
@@ -133,7 +133,7 @@ def leave_project ():
    
 
 
-@app.route("/create-project", methods=['POST'])
+@app.route("/create_project", methods=['POST'])
 def create_project():
     response = ''
     if 'username' in session:

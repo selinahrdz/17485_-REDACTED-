@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Login(props) {
+function Login() {
   const move = useNavigate();
   const [username, setuserName] = useState("");
   const [userid, setid] = useState(""); //updates email
@@ -11,7 +11,7 @@ function Login(props) {
     pass: "",
   });
 
-  function handleSubmit(e) {
+  function DataToBackend(e) {
     e.preventDefault();
     console.log(username);
 
@@ -23,7 +23,7 @@ function Login(props) {
       .then((response) => response.json())
       .then((data) => {
         if (data["message"] == "Authorized") {
-          move("/my-projects");
+          move("/my_projects");
         } else {
           //Place Holder for Modal
         }
@@ -38,46 +38,48 @@ function Login(props) {
   }
 
   return (
-    <div className=" text-center">
-      <h2 className="Auth-form-title">Login</h2>
-      <form className="form-inline" onSubmit={handleSubmit}>
-        <div className="form-group col-7 ">
-          {" "}
-          <label className="inputPassword6 ">Username</label>
-          <input
-            id="user"
-            onChange={(e) => handler(e)}
-            type="username"
-            placeholder="Username"
-            className="form-control mx-sm-3"
-            required
-          />
-        </div>
-        <div className="form-group col-7">
-          {" "}
-          <label className="inputPassword6">Password</label>
-          <input
-            onChange={(e) => handler(e)}
-            type="password"
-            placeholder="Password"
-            className="form-control mx-sm-3"
-            id="pass"
-            required
-          />
-        </div>
+    <>
+      <div className=" text-center">
+        <h2 className="Auth-form-title">Login</h2>
+        <form className="form-inline" onSubmit={DataToBackend}>
+          <div className="form-group col-7 ">
+            {" "}
+            <label className="inputPassword6 ">Username</label>
+            <input
+              id="user"
+              onChange={(e) => handler(e)}
+              type="username"
+              placeholder="Username"
+              className="form-control mx-sm-3"
+              required
+            />
+          </div>
+          <div className="form-group col-7">
+            {" "}
+            <label className="inputPassword6">Password</label>
+            <input
+              onChange={(e) => handler(e)}
+              type="password"
+              placeholder="Password"
+              className="form-control mx-sm-3"
+              id="pass"
+              required
+            />
+          </div>
 
-        <button className="login-btn btn btn-primary mt-25" type="submit">
-          Log In
+          <button className="login-btn btn btn-primary mt-25" type="submit">
+            Log In
+          </button>
+        </form>
+        <button
+          className="link-button btn btn-primary mt-25"
+          onClick={() => move("/create_account")}
+        >
+          {" "}
+          New User? Register Here
         </button>
-      </form>
-      <button
-        className="link-button btn btn-primary mt-25"
-        onClick={() => move("/create_account")}
-      >
-        {" "}
-        New User? Register Here
-      </button>
-    </div>
+      </div>
+    </>
   );
 }
 

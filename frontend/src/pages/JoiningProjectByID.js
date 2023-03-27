@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import NavigationBar from "../components/navBar.js";
 
-function CreateProject() {
+function JoiningProjectByID() {
   const move = useNavigate();
   const [Data, setData] = useState({
-    ProjectName: "",
-    ProjectDescription: "",
+    projectId: "",
   });
 
   function DataToBackend(e) {
@@ -14,15 +13,14 @@ function CreateProject() {
     //console.log(username);
 
     let form = new FormData();
-    form.append("Project_Name", Data.ProjectName);
-    form.append("Project_Description", Data.ProjectDescription);
+    form.append("Project_Id", Data.projectId);
     e.target.reset();
 
-    fetch("/create-project", { method: "POST", body: form })
+    fetch("/join-project", { method: "POST", body: form })
       .then((response) => response.json())
       .then((data) => {
-        if (data["message"] == "Project created.") {
-          move("/my-projects");
+        if (data["message"] == "Project joined.") {
+          move("/my_projects");
         } else {
           //Place Holder for Modal
         }
@@ -38,24 +36,13 @@ function CreateProject() {
   return (
     <>
       <NavigationBar />
-      <h1 className="ml-2">Create Project</h1>
+      <h1 className="ml-2">Join Project</h1>
       <div className=" text-center">
         <form className="form-inline" onSubmit={DataToBackend}>
           <div className="form-group col-7 ">
-            <label className="inputPassword6 ">Project Name</label>
+            <label className="inputPassword6 ">Project ID</label>
             <input
-              id="ProjectName"
-              onChange={(e) => handler(e)}
-              type="username"
-              placeholder="Project Name"
-              className="form-control mx-sm-3"
-              required
-            />
-          </div>
-          <div className="form-group col-7 ">
-            <label className="inputPassword6 ml-2 ">Project Description</label>
-            <input
-              id="ProjectDescription"
+              id="Project_ID"
               onChange={(e) => handler(e)}
               type="username"
               placeholder="Project ID"
@@ -63,7 +50,7 @@ function CreateProject() {
               required
             />
             <button className="login-btn btn btn-primary mt-25" type="submit">
-              Create
+              Join
             </button>
           </div>
         </form>
@@ -72,4 +59,4 @@ function CreateProject() {
   );
 }
 
-export default CreateProject;
+export default JoiningProjectByID;

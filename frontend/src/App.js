@@ -4,10 +4,10 @@ import "./App.css";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Project from "./pages/Project";
 import CreateProject from "./pages/CreateProject";
-import JoinProject from "./pages/JoinProject";
+import JoiningProjectByID from "./pages/JoiningProjectByID";
 import WelcomePage from "./pages/WelcomePage";
+import UserProjects from "./pages/UserProjects";
 
 function App() {
   // const [currentForm, setCurrentForm] = useState("login");
@@ -30,9 +30,9 @@ function App() {
         <Route exact path="/" element={<WelcomePage />} />
         <Route exact path="/login" element={<Login />} />
         <Route path="/create_account" element={<Register />} />
-        {/* <Route exact path="/my-projects" element={<Project />} />
-        <Route path="/join-project" element={<JoinProject />} />
-        <Route path="/create-project" element={<CreateProject />} /> */}
+        <Route exact path="/my_projects" element={<UserProjects />} />
+        <Route path="/join_project" element={<JoiningProjectByID />} />
+        <Route path="/create_project" element={<CreateProject />} />
       </Routes>
     </BrowserRouter>
   );
