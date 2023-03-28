@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import NotiModal from "../components/notiModal";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Register() {
@@ -45,8 +46,8 @@ function Register() {
   return (
     <div className="text-center">
       <h2 className="text-center">Register</h2>
-      <form onSubmit={(e) => dataToBackend(e)}>
-        <div className="form-row">
+      <form className="container m-5" onSubmit={(e) => dataToBackend(e)}>
+        <div className="form-row align-items-center">
           <div class="form-group col-md-6 mx-sm-3">
             <label for="inputEmail4">First Name</label>
             <input
