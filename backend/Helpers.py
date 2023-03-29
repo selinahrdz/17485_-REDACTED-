@@ -1,8 +1,8 @@
-from pymongo import MongoClient
+import json
+import jsonMaker
+
 from bson import ObjectId
-import json,jsonMaker,certifi
-
-
+from pymongo import MongoClient
 
 client = MongoClient("mongodb+srv://test:test@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
 db = client.Management
@@ -35,37 +35,36 @@ def decrypt(passw):
         decrypt += newC
     return decrypt[::-1]
 
-def sign_in(username, password): #Returns Json
-    user = user_collection.find_one({'Username':username})
+
+def sign_in(username, password):  # Returns Json
+    user = user_collection.find_one({'Username': username})
     if user is not None:
         account_password = decrypt(user['Password'])
         if password == account_password:
-            return {'message' : 'Authorized',}
+            return {'message': 'Authorized', }
         else:
-            return {'message' : 'Not Authorized, incorrect Password',}
+            return {'message': 'Not Authorized, incorrect Password', }
     else:
-        return{'message' : 'User does not exist',}
+        return {'message': 'User does not exist', }
 
-def sign_up(username, password, first_name, last_name):
-    user = user_collection.find_one({'Username':username})
+
+def sign_up(userID, username, password):
+    user = user_collection.find_one({'Username': username})
     if user is None:
         newUser = {
+            "userid": userID,
             "Username": username,
             "Password": encrypt(password),
-            "First_Name" : first_name,
-            "Last_Name": last_name,
-            "Projects" : [],
-            "HWS1_Checked_Out" : [],
-            "HWS2_Checked_Out" : []
+            "Projects": [],
+            "Sets": [0, 0]
         }
         user_collection.insert_one(newUser)
         return {'message': 'User added.', }
     else:
         return {'message': 'Username exists already.', }
-    
+
 
 # END OF USER VALIDATION
-
 
 
 # PROJECT RELATED FUNCTIONS
@@ -77,89 +76,100 @@ def project_in_user_projects(project_ID, user_projects):
     return False
 
 
-
 def get_projects(username):
-    user_project = user_collection.find_one({'Username':username}) ['Projects']
+    user_project = user_collection.find_one({'Username': username})['Projects']
     json_user_projects = json.loads(jsonMaker.MongoJSONEncoder().encode(user_project))
     user_projects = []
 
     for project in json_user_projects:
-        actualProject = project_collection.find_one({'_id':ObjectId(project[1])}) #'_id':ObjectId(project[1] - this is the ID that MongoDB assigs to the project
+        actualProject = project_collection.find_one({'_id': ObjectId(
+            project[1])})  # '_id':ObjectId(project[1] - this is the ID that MongoDB assigs to the project
         user_projects.append(json.loads(jsonMaker.MongoJSONEncoder().encode(actualProject)))
-    return 
+    return
+
 
 def join_project(username, project_ID):
-    user_projects = user_collection.find_one({'Username':username})['Projects'] #get the projects array
-    project_joining = project_collection.find_one({'_id':ObjectId(project_ID)}) #gets the project from the projects collection
+    user_projects = user_collection.find_one({'Username': username})['Projects']  # get the projects array
+    project_joining = project_collection.find_one(
+        {'_id': ObjectId(project_ID)})  # gets the project from the projects collection
     authorized_users = project_joining['Authorized_Users']
     project_name_id = []
     project_name_id.append(project_joining['Name'])
     project_name_id.append(project_joining['_id'])
 
-
-    if username not in authorized_users and username is not None: # if the user exist and is not an authorized user
+    if username not in authorized_users and username is not None:  # if the user exist and is not an authorized user
         authorized_users.append(username)
-        project_collection.update_one({'_id':ObjectId(project_ID)}, {'$set':{'Authorized_Users': authorized_users}}) #update the document in the Projects Collection
+        project_collection.update_one({'_id': ObjectId(project_ID)}, {
+            '$set': {'Authorized_Users': authorized_users}})  # update the document in the Projects Collection
     if not project_in_user_projects(project_ID, user_projects) and project_joining is not None:
         user_projects.append(project_name_id)
-        user_collection.update_one({'Username':username}, {'$set':{'Projects':user_projects}})
+        user_collection.update_one({'Username': username}, {'$set': {'Projects': user_projects}})
+
 
 def join_project_by_id(username, project_ID):
     if ObjectId.is_valid(project_ID):
-        user_projects = user_collection.find_one({'Username':username})['Projects']
-        project_joining = project_collection.find_one({'_id':ObjectId(project_ID)})
+        user_projects = user_collection.find_one({'Username': username})['Projects']
+        project_joining = project_collection.find_one({'_id': ObjectId(project_ID)})
         authorized_users = project_joining['Authorized_Users']
 
         if project_joining is not None:
-            if username not in authorized_users  and username is not None:
+            if username not in authorized_users and username is not None:
                 authorized_users.append(username)
-                project_collection.update_one({'_id':ObjectId(project_ID)}, {'$set':{'Authorized_Users':authorized_users }})
+                project_collection.update_one({'_id': ObjectId(project_ID)},
+                                              {'$set': {'Authorized_Users': authorized_users}})
             if not project_in_user_projects(project_ID, user_projects) and project_joining is not None:
                 user_projects.append(project_joining)
-                user_collection.update_one({'Username':username}, {'$set':{'Projects':user_projects}})
-            return {'message':'Project joined.',}
+                user_collection.update_one({'Username': username}, {'$set': {'Projects': user_projects}})
+            return {'message': 'Project joined.', }
         else:
-            return {'message':'Project does not exist.',}
+            return {'message': 'Project does not exist.', }
     else:
-        return {'message':'Project ID is invalid.',}
+        return {'message': 'Project ID is invalid.', }
+
 
 def leave_project(username, project_ID):
     user_projects = user_collection.find_one({'Username': username})['Projects']
-    project_leaving = project_collection.find_one({'_id':ObjectId(project_ID)})
+    project_leaving = project_collection.find_one({'_id': ObjectId(project_ID)})
     authorized_users = project_leaving['Authorized_Users']
     project_name_id = []
     project_name_id.append(project_leaving['Name'])
     project_name_id.append(project_leaving['_id'])
 
-    if username in authorized_users  and username is not None:
-        authorized_users.remove(username) #remove the username from the autho user of the project
-        project_collection.update_one({'_id':ObjectId(project_ID)}, {'$set':{'Authorized_Users':authorized_users }})
-    if  project_in_user_projects(project_ID, user_projects) and project_leaving is not None:
-        user_projects.remove(project_leaving) #remove the project from the project array of the user
-        user_collection.update_one({'Username':username}, {'$set':{'Projects':user_projects}})
-
+    if username in authorized_users and username is not None:
+        authorized_users.remove(username)  # remove the username from the autho user of the project
+        project_collection.update_one({'_id': ObjectId(project_ID)}, {'$set': {'Authorized_Users': authorized_users}})
+    if project_in_user_projects(project_ID, user_projects) and project_leaving is not None:
+        user_projects.remove(project_leaving)  # remove the project from the project array of the user
+        user_collection.update_one({'Username': username}, {'$set': {'Projects': user_projects}})
 
 
 def create_project(username, project_name, project_description):
     newProject = {"Name": project_name,
-        "Description": project_description,
-        "Authorized_Users":[username],
-        }
+                  "Description": project_description,
+                  "Authorized_Users": [username],
+                  }
     project_ID = project_collection.insert_one(newProject).inserted_id
 
     join_project(username, project_ID)
-    return {'Message': 'Project created.',}
-
-
-
-
-
+    return {'Message': 'Project created.', }
 
 # END OF PROJECT RELATED FUNCTIONS
 
 
-
-
 # HWSET RELATED FUNCTIONS
+
+def checkIn(username, HWSet, qty):  # Returns Json
+    user = user_collection.find_one({'Username': username})
+    if user is not None:
+        CheckedOut = user['Sets']
+        if HWSet == "Set1":
+            Set = hw_set_collection.find_one({'Name': "Set1"})
+
+
+
+
+
+    else:
+        return {'message': 'User does not exist', }
 
 # END OF HWSET RELATED FUNCTIONS

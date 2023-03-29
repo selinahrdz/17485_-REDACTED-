@@ -19,9 +19,10 @@ function Login() {
     form.append("Username", Data.user);
     form.append("Password", Data.pass);
 
-    fetch("/login", { method: "POST", body: form })
+    fetch("http://localhost:5000/login", { method: "POST", body: form })
       .then((response) => response.json())
       .then((data) => {
+      alert(data["message"]);
         if (data["message"] == "Authorized") {
           move("/my_projects");
         } else {
