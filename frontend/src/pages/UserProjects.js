@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Project from "../components/Project.js";
-import NavigationBar from "../components/navBar.js";
+import NavBar from "../components/navBar.js";
 
 function UserProjects() {
   const [loaded, setLoaded] = useState(false);
@@ -21,7 +21,7 @@ function UserProjects() {
     if (userProjectArray.length > 0) {
       return (
         <>
-          <NavigationBar />
+          <NavBar />
           <div>
             {userProjectArray &&
               userProjectArray.map((project) => {
@@ -33,11 +33,24 @@ function UserProjects() {
     } else {
       //NEED A PLACEHOLDER FOR WHEN THE LIST IS EMPTY
       return (
+        <>
+          <NavBar />
+          <div className="text-center">
+            NO PROJECTS AVAILABLE. CREATE OR JOIN A PROJECT TO GET STARTED
+          </div>
+        </>
+      );
+    }
+  } else {
+    //NEED A PLACEHOLDER FOR WHEN THE LIST IS EMPTY
+    return (
+      <>
+        <NavBar />
         <div className="text-center">
           NO PROJECTS AVAILABLE. CREATE OR JOIN A PROJECT TO GET STARTED
         </div>
-      );
-    }
+      </>
+    );
   }
 }
 
