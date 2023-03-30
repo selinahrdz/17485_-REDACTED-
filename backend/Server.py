@@ -16,6 +16,7 @@ set1 = HWSet.HWSet()
 set2 = HWSet.HWSet()
 set1.initialize("set1", 100)
 set2.initialize("set2", 100)
+username = ""
 
 # Returns True if login success, false if password wrong, error if user doesnt exist
 # @app.route("/login/<username>/<password>", methods=['GET'])
@@ -81,7 +82,11 @@ def log_on():
     Username = request.form['Username']
     Password = request.form['Password']
     response = Helpers.sign_in(Username, Password)
-    session['username'] = Username
+    global username
+    username = Username
+    print(username)
+    #session['username'] = Username
+    #print(session)
     return response  # This is a Json Response
 
 
@@ -93,19 +98,21 @@ def create_log_on():
     Username = request.form['Username']
     Password = request.form['Password']
     response = Helpers.sign_up(UserID, Username, Password)
-    session['username'] = Username
+    global username
+    username = Username
+    #session['username'] = Username
     return response  # This is a Json Response
 
 
 @app.route("/my_projects")
 def my_projects():
-    if 'username' in session:
-        username = session['username']
-        projects = User.get_projects(username)
+    #if 'username' in session:
+      #  username = session['username']
+        projects = Helpers.get_projects(username)
         return projects  # This is a Json Response
-
-    else:
-        return {'status': 'error', 'message': 'Log in or Sign Up', }
+    #
+    # else:
+    #     return {'status': 'error', 'message': 'Log in or Sign Up', }
 
 
 # Join a project means - Adding the Project to the user's project array and adding the user to the Authorized users
@@ -113,40 +120,42 @@ def my_projects():
 @app.route("/join_project", methods=['POST'])
 def join_project():
     response = ''
-    if 'username' in session:
-        username = session['username']
-        project_ID = request.form['Project_ID']
-        response = Helpers.joinProject(username, project_ID)
-        return response
-
-    else:
-        return {'status': 'error', 'message': 'Log in or Sign Up', }
+    # if 'username' in session:
+    #     username = session['username']
+    project_ID = request.form['Project_ID']
+    response = Helpers.join_project(username, project_ID)
+    return response
+    #
+    # else:
+    #     return {'status': 'error', 'message': 'Log in or Sign Up', }
 
 
 @app.route("/leave_project", methods=['POST'])
 def leave_project():
     response = ''
-    if 'username' in session:
-        username = session['username']
-        project_ID = request.form['Project_ID']
-        Helpers.leave_project(username, project_ID)
-        return {'status': 'success', }
-    else:
-        return {'status': 'error', 'message': 'Log in or Sign Up', }
+    # if 'username' in session:
+    #     username = session['username']
+    project_ID = request.form['Project_ID']
+    Helpers.leave_project(username, project_ID)
+    return {'status': 'success', }
+    # else:
+    #     return {'status': 'error', 'message': 'Log in or Sign Up', }
 
 
 @app.route("/create_project", methods=['POST'])
 def create_project():
+    print(username)
     response = ''
-    if 'username' in session:
-        username = session['username']
-        project_name = request.form['Project_Name']
-        project_description = request.form['Project_Description']
+    # if 'username' in session:
+    #     username = session['username']
+    project_name = request.form['Project_Name']
+    project_description = request.form['Project_Description']
 
-        response = Helpers.create_project(username, project_name, project_description)
-        return response
-    else:
-        return {'status': 'error', 'message': 'Please log in or sign up.', }
+    response = Helpers.create_project(username, project_name, project_description)
+    print(response)
+    return response
+    # else:
+    #     return {'status': 'error', 'message': 'Please log in or sign up.', }
 
 
 @app.route("/CheckIn", methods=['POST'])

@@ -83,7 +83,7 @@ def get_projects(username):
 
     for project in json_user_projects:
         actualProject = project_collection.find_one({'_id': ObjectId(
-            project[1])})  # '_id':ObjectId(project[1] - this is the ID that MongoDB assigs to the project
+           project[1])})  # '_id':ObjectId(project[1] - this is the ID that MongoDB assigs to the project
         user_projects.append(json.loads(jsonMaker.MongoJSONEncoder().encode(actualProject)))
     return
 
@@ -149,7 +149,7 @@ def create_project(username, project_name, project_description):
                   "Authorized_Users": [username],
                   }
     project_ID = project_collection.insert_one(newProject).inserted_id
-
+    print(username, project_name, project_description)
     join_project(username, project_ID)
     return {'Message': 'Project created.', }
 

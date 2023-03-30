@@ -18,11 +18,12 @@ function CreateProject() {
     form.append("Project_Description", Data.ProjectDescription);
     e.target.reset();
 
-    fetch("/create-project", { method: "POST", body: form })
+    fetch("http://localhost:5000/create_project", { method: "POST", body: form })
       .then((response) => response.json())
       .then((data) => {
-        if (data["message"] == "Project created.") {
-          move("/my-projects");
+      alert(data["Message"]);
+        if (data["Message"] == "Project created.") {
+          move("/my_projects");
         } else {
           //Place Holder for Modal
         }

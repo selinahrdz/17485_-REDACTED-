@@ -29,7 +29,7 @@ function Register() {
       .then((response) => response.json())
       .then((data) => {
         if (data["message"] == "User added.") {
-          move("/my-projects");
+          move("/my_projects");
         } else {
           //Place Holder for Modal
         }

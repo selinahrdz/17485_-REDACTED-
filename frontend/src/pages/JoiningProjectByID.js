@@ -16,7 +16,7 @@ function JoiningProjectByID() {
     form.append("Project_Id", Data.projectId);
     e.target.reset();
 
-    fetch("/join-project", { method: "POST", body: form })
+    fetch("http://localhost:5000/join_project", { method: "POST", body: form })
       .then((response) => response.json())
       .then((data) => {
         if (data["message"] == "Project joined.") {
