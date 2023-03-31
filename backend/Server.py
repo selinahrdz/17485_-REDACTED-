@@ -10,13 +10,13 @@ app = Flask(__name__)
 app.secret_key = "This Is The Key"
 CORS(app)
 
-
 # user = Driver.Driver()
 set1 = HWSet.HWSet()
 set2 = HWSet.HWSet()
 set1.initialize("set1", 100)
 set2.initialize("set2", 100)
 username = ""
+
 
 # Returns True if login success, false if password wrong, error if user doesnt exist
 # @app.route("/login/<username>/<password>", methods=['GET'])
@@ -85,8 +85,8 @@ def log_on():
     global username
     username = Username
     print(username)
-    #session['username'] = Username
-    #print(session)
+    # session['username'] = Username
+    # print(session)
     return response  # This is a Json Response
 
 
@@ -100,19 +100,21 @@ def create_log_on():
     response = Helpers.sign_up(UserID, Username, Password)
     global username
     username = Username
-    #session['username'] = Username
+    # session['username'] = Username
     return response  # This is a Json Response
 
 
 @app.route("/my_projects")
 def my_projects():
-    #if 'username' in session:
-      #  username = session['username']
-        projects = Helpers.get_projects(username)
-        return projects  # This is a Json Response
-    #
-    # else:
-    #     return {'status': 'error', 'message': 'Log in or Sign Up', }
+    # if 'username' in session:
+    #  username = session['username']
+    projects = Helpers.get_projects(username)
+    return projects  # This is a Json Response
+
+
+#
+# else:
+#     return {'status': 'error', 'message': 'Log in or Sign Up', }
 
 
 # Join a project means - Adding the Project to the user's project array and adding the user to the Authorized users
@@ -161,29 +163,37 @@ def create_project():
 @app.route("/CheckIn", methods=['POST'])
 def checkIn():
     response = ''
-    if 'username' in session:
-        username = session['username']
-        project_name = request.form['Project_Name']
-        project_description = request.form['Project_Description']
-
-        response = Helpers.create_project(username, project_name, project_description)
-        return response
-    else:
-        return {'status': 'error', 'message': 'Please log in or sign up.', }
+    # if 'username' in session:
+    #     username = session['username']
+    set_name = request.form['Set_Name']
+    qty = request.form['qty']
+    response = Helpers.checkIn(username, set_name, qty)
+    return response
+    # else:
+    #     return {'status': 'error', 'message': 'Please log in or sign up.', }
 
 
 @app.route("/CheckOut", methods=['POST'])
 def checkOut():
     response = ''
-    if 'username' in session:
-        username = session['username']
-        project_name = request.form['Project_Name']
-        project_description = request.form['Project_Description']
+    # if 'username' in session:
+    #     username = session['username']
+    set_name = request.form['Set_Name']
+    qty = request.form['qty']
+    response = Helpers.checkOut(username, set_name, qty)
+    return response
+    # else:
+    #     return {'status': 'error', 'message': 'Please log in or sign up.', }
 
-        response = Helpers.create_project(username, project_name, project_description)
-        return response
-    else:
-        return {'status': 'error', 'message': 'Please log in or sign up.', }
+
+@app.route("/SetInit", methods=['POST'])
+def SetInit():
+    response = ''
+    # if 'username' in session:
+    #     username = session['username']
+    return {'Set1': "Set1", 'qty1': 100, 'Set2': "Set2", 'qty2': 100}
+    # else:
+    #     return {'status': 'error', 'message': 'Please log in or sign up.', }
 
 
 if __name__ == "__main__":

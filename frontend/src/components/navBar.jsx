@@ -27,7 +27,16 @@ function NavBar(props) {
             placeholder="Project ID to Join"
             ref={projectInput}
           />
-          <button className="btn btn-primary btn-sm m-2"onClick={() => move("/join_project")}>Join Project</button>
+          <button
+            className="btn btn-primary btn-sm m-2"
+            type="button"
+            onClick={() => {
+              props.joinHandler(projectInput.current.value);
+              inputReset();
+            }}
+          >
+            Join Project
+          </button>
 
           <button className="btn btn-secondary btn-sm m-2 justify-content-end">
             Sign Out

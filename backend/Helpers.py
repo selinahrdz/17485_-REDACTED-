@@ -83,7 +83,7 @@ def get_projects(username):
 
     for project in json_user_projects:
         actualProject = project_collection.find_one({'_id': ObjectId(
-           project[1])})  # '_id':ObjectId(project[1] - this is the ID that MongoDB assigs to the project
+            project[1])})  # '_id':ObjectId(project[1] - this is the ID that MongoDB assigs to the project
         user_projects.append(json.loads(jsonMaker.MongoJSONEncoder().encode(actualProject)))
     return
 
@@ -153,23 +153,48 @@ def create_project(username, project_name, project_description):
     join_project(username, project_ID)
     return {'Message': 'Project created.', }
 
+
 # END OF PROJECT RELATED FUNCTIONS
 
 
 # HWSET RELATED FUNCTIONS
 
 def checkIn(username, HWSet, qty):  # Returns Json
-    user = user_collection.find_one({'Username': username})
-    if user is not None:
-        CheckedOut = user['Sets']
-        if HWSet == "Set1":
-            Set = hw_set_collection.find_one({'Name': "Set1"})
+    user_projects = user_collection.find_one({'Username': username})['Sets']
+    i = 0
+    if HWSet == "Set2":
+        i = 1
 
-
-
-
-
+    amount = user_projects[i]
+    setAval = hw_set_collection.find_one({'Name': HWSet})['Availability']
+    setCap = hw_set_collection.find_one({'Name': HWSet})['Capacity']
+    if amount - qty >= 0:
+        if setAval + qty <= setCap:
+            user_projects[i] = user_projects[i] - qty
+            setAval = setAval + qty
+            user_collection.update_one({'Username': username}, {'Sets': user_projects})
+            hw_set_collection.update_one({'Name': HWSet}, {'Availability': setAval})
+            return {'Message': 'Success', 'Set_Name': HWSet, 'Availability': setAval}
+        else:
+            return {'Message': 'Hardware Set at full capacity', }
     else:
-        return {'message': 'User does not exist', }
+        return {'Message': 'User does not have enough hardware to check in', }
+
+
+def checkOut(username, HWSet, qty):  # Returns Json
+    user_projects = user_collection.find_one({'Username': username})['Sets']
+    i = 0
+    if HWSet == "Set2":
+        i = 1
+
+    setAval = hw_set_collection.find_one({'Name': HWSet})['Availability']
+    if setAval - qty >= 0:
+        user_projects[i] = user_projects[i] + qty
+        setAval = setAval - qty
+        user_collection.update_one({'Username': username}, {'Sets': user_projects})
+        hw_set_collection.update_one({'Name': HWSet}, {'Availability': setAval})
+        return {'Message': 'Success', 'Set_Name': HWSet, 'Availability': setAval}
+    else:
+        return {'Message': 'Not Enough Hardware', }
 
 # END OF HWSET RELATED FUNCTIONS

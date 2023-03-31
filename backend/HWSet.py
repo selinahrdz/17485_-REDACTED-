@@ -62,10 +62,9 @@ class HWSet:
     def update_database(self):
         client = MongoClient(
             "mongodb+srv://test:test@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
-        db = client["HardwareSets"]
-        collection_name = self.__name
-        collection = db[collection_name]
-        collection.drop()
+        db = client["Management"]
+        collection = db.HWSet
+        collection.delete_many({'Name': self.__name})
         hardwareSet = {
             "Name": self.__name,
             "Capacity": self.__capacity,
