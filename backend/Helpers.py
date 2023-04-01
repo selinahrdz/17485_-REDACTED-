@@ -4,7 +4,8 @@ import jsonMaker
 from bson import ObjectId
 from pymongo import MongoClient
 
-client = MongoClient("mongodb+srv://test:test@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
+# client = MongoClient("mongodb+srv://test:test@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://frankieortiz2001:Volcano11s11@cluster0.uoazbvh.mongodb.net/?retryWrites=true&w=majority")
 db = client.Management
 user_collection = db.Users
 project_collection = db.Projects
@@ -63,7 +64,6 @@ def sign_up(userID, username, password):
     else:
         return {'message': 'Username exists already.', }
 
-
 # END OF USER VALIDATION
 
 
@@ -77,6 +77,7 @@ def project_in_user_projects(project_ID, user_projects):
 
 
 def get_projects(username):
+    print("reached get_projects helper boss, current user is"+ username)
     user_project = user_collection.find_one({'Username': username})['Projects']
     json_user_projects = json.loads(jsonMaker.MongoJSONEncoder().encode(user_project))
     user_projects = []
@@ -85,7 +86,7 @@ def get_projects(username):
         actualProject = project_collection.find_one({'_id': ObjectId(
             project[1])})  # '_id':ObjectId(project[1] - this is the ID that MongoDB assigs to the project
         user_projects.append(json.loads(jsonMaker.MongoJSONEncoder().encode(actualProject)))
-    return
+    return user_projects
 
 
 def join_project(username, project_ID):
@@ -107,6 +108,7 @@ def join_project(username, project_ID):
 
 
 def join_project_by_id(username, project_ID):
+    print("you made it v2")
     if ObjectId.is_valid(project_ID):
         user_projects = user_collection.find_one({'Username': username})['Projects']
         project_joining = project_collection.find_one({'_id': ObjectId(project_ID)})

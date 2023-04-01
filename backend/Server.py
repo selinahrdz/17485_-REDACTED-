@@ -93,6 +93,7 @@ def log_on():
 # Route for Sign Up Page
 @app.route("/create_account", methods=['POST'])
 def create_log_on():
+    print("hi")
     response = ''
     UserID = request.form['UserID']
     Username = request.form['Username']
@@ -106,10 +107,16 @@ def create_log_on():
 
 @app.route("/my_projects")
 def my_projects():
+    print("reached the function boss,")
     # if 'username' in session:
     #  username = session['username']
+    print(username)
     projects = Helpers.get_projects(username)
     return projects  # This is a Json Response
+
+# @app.route("/get_username")
+# def get_username():
+#     return ({'username': username})
 
 
 #
@@ -122,10 +129,11 @@ def my_projects():
 @app.route("/join_project", methods=['POST'])
 def join_project():
     response = ''
+    print("you made it")
     # if 'username' in session:
     #     username = session['username']
     project_ID = request.form['Project_ID']
-    response = Helpers.join_project(username, project_ID)
+    response = Helpers.join_project_by_id(username, project_ID)
     return response
     #
     # else:

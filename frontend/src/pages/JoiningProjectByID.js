@@ -13,12 +13,16 @@ function JoiningProjectByID() {
     //console.log(username);
 
     let form = new FormData();
-    form.append("Project_Id", Data.projectId);
+    alert(Data.projectId);
+    form.append("Project_ID", Data.projectId);
     e.target.reset();
+
+    alert(form.get('Project_ID'));
 
     fetch("http://localhost:5000/join_project", { method: "POST", body: form })
       .then((response) => response.json())
       .then((data) => {
+        alert(data["message"]);
         if (data["message"] == "Project joined.") {
           move("/my_projects");
         } else {
@@ -29,9 +33,12 @@ function JoiningProjectByID() {
       .catch((err) => console.log(err));
   }
   function handler(e) {
+    // alert(e.target.value);
     const newData = { ...Data };
+     // alert(e.target.id);
     newData[e.target.id] = e.target.value;
     setData(newData);
+    // alert(Data.projectId);
   }
   return (
     <>
@@ -42,7 +49,7 @@ function JoiningProjectByID() {
           <div className="form-group col-7 ">
             <label className="inputPassword6 ">Project ID</label>
             <input
-              id="Project_ID"
+              id="projectId"
               onChange={(e) => handler(e)}
               type="username"
               placeholder="Project ID"
