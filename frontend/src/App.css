@@ -20,7 +20,7 @@
   padding: 5px;
 
 }
-.auth-form-container,.project-container{
+.login-form,.register-form{
   padding: 5rem;
   border: 1px solid white;
   border-radius: 10px;
@@ -40,23 +40,26 @@ input{
 
 }
 
-button{
+button, .signup-btn{
   border: none;
   background-color: white;
   padding: 20px;
   border-radius: 10px;
 
 }
+.signup-btn{
+  margin-top: 10px;
+}
 
-.link-button{
+.register-btn,.back-btn{
   background: none;
   color: white;
   text-decoration: underline;
   
 }
 
-.link,.login-btn,.register-btn{
+.login-btn,.register-btn{
   margin-top: 15px;
   border-radius: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 2px;
 }

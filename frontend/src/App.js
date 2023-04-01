@@ -25,16 +25,18 @@ function App() {
   //   </div>
   // );
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route exact path="/" element={<WelcomePage />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route path="/create_account" element={<Register />} />
-        <Route exact path="/my_projects" element={<UserProjects />} />
-        <Route path="/join_project" element={<JoiningProjectByID />} />
-        <Route path="/create_project" element={<CreateProject />} />
-      </Routes>
-    </BrowserRouter>
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<WelcomePage />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route path="/create_account" element={<Register />} />
+          <Route exact path="/my_projects" element={<UserProjects />} />
+          <Route path="/join_project" element={<JoiningProjectByID />} />
+          <Route path="/create_project" element={<CreateProject />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

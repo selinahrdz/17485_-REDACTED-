@@ -22,7 +22,7 @@ function Login() {
     fetch("http://localhost:5000/login", { method: "POST", body: form })
       .then((response) => response.json())
       .then((data) => {
-      alert(data["message"]);
+        alert(data["message"]);
         if (data["message"] == "Authorized") {
           move("/my_projects");
         } else {
@@ -40,40 +40,37 @@ function Login() {
 
   return (
     <>
-      <div className=" text-center">
-        <h2 className="Auth-form-title">Login</h2>
-        <form className="form-inline" onSubmit={DataToBackend}>
-          <div className="form-group col-7 ">
-            {" "}
-            <label className="inputPassword6 ">Username</label>
-            <input
-              id="user"
-              onChange={(e) => handler(e)}
-              type="username"
-              placeholder="Username"
-              className="form-control mx-sm-3"
-              required
-            />
-          </div>
-          <div className="form-group col-7">
-            {" "}
-            <label className="inputPassword6">Password</label>
-            <input
-              onChange={(e) => handler(e)}
-              type="password"
-              placeholder="Password"
-              className="form-control mx-sm-3"
-              id="pass"
-              required
-            />
-          </div>
-
-          <button className="login-btn btn btn-primary mt-25" type="submit">
+      <div className="login-form">
+        <h2 className="login-title">Login</h2>
+        <form className="form" onSubmit={DataToBackend}>
+          {/* <div className="form-group col-7 "> */}{" "}
+          <label className="username-login">Username</label>
+          <input
+            id="user"
+            onChange={(e) => handler(e)}
+            type="username"
+            placeholder="Username"
+            className="form-control mx-sm-3"
+            required
+          />
+          {/* </div> */}
+          {/* <div className="form-group col-7"> */}{" "}
+          <label className="username-password">Password</label>
+          <input
+            onChange={(e) => handler(e)}
+            type="password"
+            placeholder="Password"
+            className="form-control mx-sm-3"
+            id="pass"
+            required
+          />
+          {/* </div> */}
+          <button className="login-btn" type="submit">
             Log In
           </button>
         </form>
         <button
-          className="link-button btn btn-primary mt-25"
+          className="register-btn"
           onClick={() => move("/create_account")}
         >
           {" "}
