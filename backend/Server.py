@@ -133,7 +133,7 @@ def join_project():
     # if 'username' in session:
     #     username = session['username']
     project_ID = request.form['Project_ID']
-    response = Helpers.join_project_by_id(username, project_ID)
+    response = Helpers.join_project(username, project_ID)
     return response
     #
     # else:
@@ -160,6 +160,7 @@ def create_project():
     #     username = session['username']
     project_name = request.form['Project_Name']
     project_description = request.form['Project_Description']
+
     response = Helpers.create_project(username, project_name, project_description)
     print(response)
     return response
