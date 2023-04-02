@@ -60,7 +60,7 @@ function ProjectBox(props) {
             <button
               type="button"
               className="btn btn-danger"
-              onClick={() => testLeave()}
+           //   onClick={() => testLeave()}
             >
               Leave Project
             </button>
