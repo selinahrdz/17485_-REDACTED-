@@ -43,9 +43,7 @@ function NavBar(props) {
             Join Project
           </button>
 
-          <button className="btn btn-secondary btn-sm m-2 justify-content-end">
-            Sign Out
-          </button>
+          <button className="btn btn-primary btn-sm m-2"onClick={() => move("/Login")}>Logout</button>
         </div>
       </nav>
     </>

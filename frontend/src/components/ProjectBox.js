@@ -3,6 +3,51 @@ import HwSets from "./hwSets";
 
 function ProjectBox(props) {
   const id_num = props.id;
+  let Availability1 = 0;
+  let Availability2 = 0;
+
+  function initializeHWSet1() {
+    const formData2 = new FormData();
+    formData2.append("Set_Name", "set1");
+    formData2.append("qty", 0);
+
+    fetch("http://localhost:5000/check_out_Hw", {
+      method: "POST",
+      body: formData2,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        Availability1 = Number(data["Availability"]);
+      })
+      .catch((error) => console.log(error));
+
+    return Availability1;
+  }
+
+  function initializeHWSet2() {
+    const formData2 = new FormData();
+    formData2.append("Set_Name", "set1");
+    formData2.append("qty", 0);
+
+    fetch("http://localhost:5000/check_out_Hw", {
+      method: "POST",
+      body: formData2,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        Availability2 = Number(data["Availability"]);
+      })
+      .catch((error) => console.log(error));
+
+    return Availability2;
+  }
+
+
+  initializeHWSet1();
+  initializeHWSet2();
+
 
   return (
     <>
@@ -15,7 +60,7 @@ function ProjectBox(props) {
             <button
               type="button"
               className="btn btn-danger"
-              onClick={() => props.leaveHandler(id_num)}
+              onClick={() => testLeave()}
             >
               Leave Project
             </button>
@@ -26,8 +71,8 @@ function ProjectBox(props) {
               id={props.id}
               type="button"
               projName={props.projName}
-              hw1SetAmount={props.hw1SetAmount}
-              hw2SetAmount={props.hw2SetAmount}
+              hw1SetAmount={Availability1}
+              hw2SetAmount={Availability2}
               inProject={props.inProject}
             />
           </div>
