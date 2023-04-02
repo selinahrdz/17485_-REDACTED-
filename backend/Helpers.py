@@ -4,12 +4,16 @@ import jsonMaker
 from bson import ObjectId
 from pymongo import MongoClient
 
-# client = MongoClient("mongodb+srv://test:test@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
-client = MongoClient("mongodb+srv://frankieortiz2001:Volcano11s11@cluster0.uoazbvh.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://test:test@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
+# client = MongoClient("mongodb+srv://frankieortiz2001:Volcano11s11@cluster0.uoazbvh.mongodb.net/?retryWrites=true&w=majority")
 db = client.Management
 user_collection = db.Users
 project_collection = db.Projects
 hw_set_collection = db.HWSet
+
+
+def clearDatabase():
+    client.drop_database('Management')
 
 
 # USER VALIDATION
@@ -64,6 +68,7 @@ def sign_up(userID, username, password):
     else:
         return {'message': 'Username exists already.', }
 
+
 # END OF USER VALIDATION
 
 
@@ -77,7 +82,7 @@ def project_in_user_projects(project_ID, user_projects):
 
 
 def get_projects(username):
-    print("reached get_projects helper boss, current user is"+ username)
+    print("reached get_projects helper boss, current user is" + username)
     user_project = user_collection.find_one({'Username': username})['Projects']
     json_user_projects = json.loads(jsonMaker.MongoJSONEncoder().encode(user_project))
     user_projects = []
@@ -162,9 +167,11 @@ def create_project(username, project_name, project_description):
 # HWSET RELATED FUNCTIONS
 
 def checkIn(username, HWSet, qty):  # Returns Json
+    print("hi")
+    qty = int(qty)
     user_projects = user_collection.find_one({'Username': username})['Sets']
     i = 0
-    if HWSet == "Set2":
+    if HWSet == "set2":
         i = 1
 
     amount = user_projects[i]
@@ -174,29 +181,31 @@ def checkIn(username, HWSet, qty):  # Returns Json
         if setAval + qty <= setCap:
             user_projects[i] = user_projects[i] - qty
             setAval = setAval + qty
-            user_collection.update_one({'Username': username}, {'Sets': user_projects})
-            hw_set_collection.update_one({'Name': HWSet}, {'Availability': setAval})
-            return {'Message': 'Success', 'Set_Name': HWSet, 'Availability': setAval}
+            user_collection.update_one({'Username': username}, {'$set': {'Sets': user_projects}})
+            hw_set_collection.update_one({'Name': HWSet}, {'$set': {'Availability': setAval}})
+            return {'message': 'Success', 'Set_Name': HWSet, 'Availability': setAval}
         else:
-            return {'Message': 'Hardware Set at full capacity', }
+            return {'message': 'Hardware Set at full capacity', }
     else:
-        return {'Message': 'User does not have enough hardware to check in', }
+        return {'message': 'User does not have enough hardware to check in', }
 
 
 def checkOut(username, HWSet, qty):  # Returns Json
     user_projects = user_collection.find_one({'Username': username})['Sets']
     i = 0
-    if HWSet == "Set2":
+    if HWSet == "set2":
         i = 1
 
-    setAval = hw_set_collection.find_one({'Name': HWSet})['Availability']
+    setAval = hw_set_collection.find_one({'Name': HWSet})['Availability']  # bug here
+    setAval = int(setAval)
+    qty = int(qty)
     if setAval - qty >= 0:
         user_projects[i] = user_projects[i] + qty
         setAval = setAval - qty
-        user_collection.update_one({'Username': username}, {'Sets': user_projects})
-        hw_set_collection.update_one({'Name': HWSet}, {'Availability': setAval})
-        return {'Message': 'Success', 'Set_Name': HWSet, 'Availability': setAval}
+        user_collection.update_one({'Username': username}, {'$set': {'Sets': user_projects}})
+        hw_set_collection.update_one({'Name': HWSet}, {'$set': {'Availability': setAval}})
+        return {'message': 'Success', 'Set_Name': HWSet, 'Availability': setAval}
     else:
-        return {'Message': 'Not Enough Hardware', }
+        return {'message': 'Not Enough Hardware', }
 
 # END OF HWSET RELATED FUNCTIONS

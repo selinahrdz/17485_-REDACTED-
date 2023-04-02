@@ -18,19 +18,22 @@ function HwSets(props) {
     console.log(input);
 
     const formData = new FormData();
-    formData.append("HardwareSet", 1);
-    formData.append("Amount", input);
+    formData.append("Set_name", "set1");
+    formData.append("qty", input);
 
-    fetch("/check_in_Hw", { method: "POST", body: formData })
+    fetch("http://localhost:5000/check_in_Hw", {
+      method: "POST",
+      body: formData,
+    })
       .then((response) => response.json())
       .then((data) => {
+      alert(data["message"]);
         console.log(data);
         setShowNotification(true);
         setNotification(data["message"]);
+        setHWSet1Data(Number(data["Availability"]));
       })
       .catch((error) => console.log(error));
-
-    setHWSet1Data(Number(HWSet1Data) - Number(input));
 
     hw1Input.current.value = null;
   }
@@ -40,19 +43,21 @@ function HwSets(props) {
     console.log(input);
 
     const formData = new FormData();
-    formData.append("HardwareSet", 2);
-    formData.append("Amount", input);
+    formData.append("Set_Name", "set2");
+    formData.append("qty", input);
 
-    fetch("/check_in_Hw", { method: "POST", body: formData })
+    fetch("http://localhost:5000/check_in_Hw", {
+      method: "POST",
+      body: formData,
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         setShowNotification(true);
         setNotification(data["message"]);
+        setHWSet2Data(Number(data["Availability"]));
       })
       .catch((error) => console.log(error));
-
-    setHWSet1Data(Number(HWSet2Data) - Number(input));
     hw2Input.current.value = null;
   }
 
@@ -61,19 +66,24 @@ function HwSets(props) {
     console.log(input);
 
     const formData = new FormData();
-    formData.append("HardwareSet", 1);
-    formData.append("Amount", input);
+    formData.append("Set_Name", "set1");
+    formData.append("qty", input);
 
-    fetch("/check_out_Hw", { method: "POST", body: formData })
+    fetch("http://localhost:5000/check_out_Hw", {
+      method: "POST",
+      body: formData,
+    })
       .then((response) => response.json())
       .then((data) => {
+      alert(data["message"]);
         console.log(data);
         setShowNotification(true);
         setNotification(data["message"]);
+        setHWSet1Data(Number(data["Availability"]));
       })
       .catch((error) => console.log(error));
 
-    setHWSet1Data(Number(HWSet1Data) + Number(input));
+
     hw1Input.current.value = null;
   }
 
@@ -82,19 +92,22 @@ function HwSets(props) {
     console.log(input);
 
     const formData = new FormData();
-    formData.append("HardwareSet", 2);
-    formData.append("Amount", input);
+    formData.append("Set_Name", "set2");
+    formData.append("qty", input);
 
-    fetch("/check_out_Hw", { method: "POST", body: formData })
+    fetch("http://localhost:5000/check_out_Hw", {
+      method: "POST",
+      body: formData,
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         setShowNotification(true);
         setNotification(data["message"]);
+        setHWSet2Data(Number(data["Availability"]));
       })
       .catch((error) => console.log(error));
 
-    setHWSet1Data(Number(HWSet2Data) + Number(input));
     hw2Input.current.value = null;
   }
   function showNotificationModal() {
