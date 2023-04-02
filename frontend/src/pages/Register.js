@@ -38,6 +38,7 @@ function Register() {
           move("/my_projects");
         } else {
           setNotification(data["message"]);
+          setShowNotification(true);
         }
         console.log(Data);
       });

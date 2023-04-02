@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import NavigationBar from "../components/navBar.js";
+import NavigationBar from "../components/navBar.jsx";
+import NotiModal from "../components/notiModal.js";
 
 function CreateProject() {
   const move = useNavigate();
@@ -8,6 +9,10 @@ function CreateProject() {
     ProjectName: "",
     ProjectDescription: "",
   });
+
+  //For Modal Notification
+  const [showNotification, setShowNotification] = useState(false);
+  const [notification, setNotification] = useState("");
 
   function DataToBackend(e) {
     e.preventDefault();
@@ -18,14 +23,18 @@ function CreateProject() {
     form.append("Project_Description", Data.ProjectDescription);
     e.target.reset();
 
-    fetch("http://localhost:5000/create_project", { method: "POST", body: form })
+    fetch("http://localhost:5000/create_project", {
+      method: "POST",
+      body: form,
+    })
       .then((response) => response.json())
       .then((data) => {
-      alert(data["Message"]);
+        alert(data["Message"]);
         if (data["Message"] == "Project created.") {
           move("/my_projects");
         } else {
-          //Place Holder for Modal
+          setNotification(data["message"]);
+          setShowNotification(true);
         }
         console.log(Data);
       })
@@ -36,38 +45,61 @@ function CreateProject() {
     newData[e.target.id] = e.target.value;
     setData(newData);
   }
+
+  function showNotificationModal() {
+    setShowNotification(!showNotification);
+  }
   return (
     <>
+      <NotiModal
+        show={showNotification}
+        type="Server Message"
+        noti={notification}
+        handleClose={showNotificationModal}
+      />
       <NavigationBar />
-      <h1 className="ml-2">Create Project</h1>
-      <div className=" text-center">
-        <form className="form-inline" onSubmit={DataToBackend}>
-          <div className="form-group col-7 ">
-            <label className="inputPassword6 ">Project Name</label>
-            <input
-              id="ProjectName"
-              onChange={(e) => handler(e)}
-              type="username"
-              placeholder="Project Name"
-              className="form-control mx-sm-3"
-              required
-            />
+      <h1 className="ml-2 text-center mt-5">Create Project</h1>
+      <div className="container mt-5">
+        <div className="row d-flex justify-content-center">
+          <div className="col-md-6">
+            <div className="card px-5 py-5">
+              <form className="" onSubmit={DataToBackend}>
+                <div className="forms-inputs mb-4">
+                  <label className="inputPassword6 ">Project Name</label>
+                  <input
+                    id="ProjectName"
+                    onChange={(e) => handler(e)}
+                    type="username"
+                    placeholder="Project Name"
+                    className="form-control mx-sm-3"
+                    required
+                  />
+                </div>
+                <div className="forms-inputs mb-4">
+                  <label className="inputPassword6 ml-2 ">
+                    Project Description
+                  </label>
+                  <input
+                    id="ProjectDescription"
+                    onChange={(e) => handler(e)}
+                    type="username"
+                    placeholder="Project ID"
+                    className="form-control mx-sm-3"
+                    required
+                  />
+                </div>
+                <div className="text-center">
+                  <button
+                    className="login-btn btn btn-primary mt-25"
+                    type="submit"
+                  >
+                    Create
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-          <div className="form-group col-7 ">
-            <label className="inputPassword6 ml-2 ">Project Description</label>
-            <input
-              id="ProjectDescription"
-              onChange={(e) => handler(e)}
-              type="username"
-              placeholder="Project ID"
-              className="form-control mx-sm-3"
-              required
-            />
-            <button className="login-btn btn btn-primary mt-25" type="submit">
-              Create
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
     </>
   );

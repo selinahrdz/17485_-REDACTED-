@@ -27,7 +27,7 @@ function HwSets(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-      alert(data["message"]);
+        alert(data["message"]);
         console.log(data);
         setShowNotification(true);
         setNotification(data["message"]);
@@ -55,9 +55,9 @@ function HwSets(props) {
         console.log(data);
         setShowNotification(true);
         setNotification(data["message"]);
-        if(data["message"] == ("success")){
-        setHWSet2Data(Number(data["Availability"]));
-
+        if (data["message"] == "success") {
+          setHWSet2Data(Number(data["Availability"]));
+        }
       })
       .catch((error) => console.log(error));
     hw2Input.current.value = null;
@@ -77,14 +77,13 @@ function HwSets(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-      alert(data["message"]);
+        alert(data["message"]);
         console.log(data);
         setShowNotification(true);
         setNotification(data["message"]);
         setHWSet1Data(Number(data["Availability"]));
       })
       .catch((error) => console.log(error));
-
 
     hw1Input.current.value = null;
   }

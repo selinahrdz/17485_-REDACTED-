@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Project from "../components/Project.js";
 import NavBar from "../components/navBar.jsx";
 import ProjectBox from "../components/ProjectBox.js";
 
@@ -15,24 +14,22 @@ function UserProjects() {
         console.log(data);
         setLoaded(true);
         setUserProjectArray(data);
-
       })
       .catch((err) => console.log(err));
   }, []);
 
   if (loaded) {
-   // alert("found projects");
+    // alert("found projects");
     if (userProjectArray.length > 0) {
-      alert("user has "+ userProjectArray.length + " projects");
+      alert("user has " + userProjectArray.length + " projects");
       return (
-        
         <>
           <NavBar />
           <div>
             <div>
-            {userProjectArray.map((proj) => (
-              <ProjectBox />
-            ))}
+              {userProjectArray.map((proj) => (
+                <ProjectBox />
+              ))}
             </div>
             {/* {userProjectArray &&
               userProjectArray.map((project) => {
@@ -47,7 +44,7 @@ function UserProjects() {
       return (
         <>
           <NavBar />
-          <div className="text-center">
+          <div className="text-center mt-5">
             PROJECTS FOUND. WAITING ON PROJECT COMPONENT IMPLEMENTATION
           </div>
         </>
@@ -58,8 +55,9 @@ function UserProjects() {
     return (
       <>
         <NavBar />
-        <div className="text-center">
-          FAILED TO LOAD PROJECTS. EITHER YOU HAVE NO PROJECTS, OR THE SYSTEM IS DOWN
+        <div className="text-center mt-5">
+          FAILED TO LOAD PROJECTS. EITHER YOU HAVE NO PROJECTS, OR THE SYSTEM IS
+          DOWN
         </div>
       </>
     );
