@@ -4,8 +4,8 @@ import jsonMaker
 from bson import ObjectId
 from pymongo import MongoClient
 
-# client = MongoClient("mongodb+srv://test:test@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
-client = MongoClient("mongodb+srv://frankieortiz2001:Volcano11s11@cluster0.uoazbvh.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://test:test@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
+# client = MongoClient("mongodb+srv://frankieortiz2001:Volcano11s11@cluster0.uoazbvh.mongodb.net/?retryWrites=true&w=majority")
 db = client.Management
 user_collection = db.Users
 project_collection = db.Projects
@@ -164,7 +164,7 @@ def create_project(username, project_name, project_description):
 def checkIn(username, HWSet, qty):  # Returns Json
     user_projects = user_collection.find_one({'Username': username})['Sets']
     i = 0
-    if HWSet == "Set2":
+    if HWSet == "set2":
         i = 1
 
     amount = user_projects[i]
@@ -186,10 +186,12 @@ def checkIn(username, HWSet, qty):  # Returns Json
 def checkOut(username, HWSet, qty):  # Returns Json
     user_projects = user_collection.find_one({'Username': username})['Sets']
     i = 0
-    if HWSet == "Set2":
+    if HWSet == "set2":
         i = 1
 
-    setAval = hw_set_collection.find_one({'Name': HWSet})['Availability']
+    setAval = hw_set_collection.find_one({'Name': HWSet})['Availability'] #bug here
+    setAval = int(setAval)
+    qty = int(qty)
     if setAval - qty >= 0:
         user_projects[i] = user_projects[i] + qty
         setAval = setAval - qty

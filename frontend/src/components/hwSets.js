@@ -18,10 +18,13 @@ function HwSets(props) {
     console.log(input);
 
     const formData = new FormData();
-    formData.append("HardwareSet", 1);
-    formData.append("Amount", input);
+    formData.append("Set_name", "set1");
+    formData.append("qty", input);
 
-    fetch("/check_in_Hw", { method: "POST", body: formData })
+    fetch("http://localhost:5000/check_in_Hw", {
+      method: "POST",
+      body: formData,
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -40,10 +43,13 @@ function HwSets(props) {
     console.log(input);
 
     const formData = new FormData();
-    formData.append("HardwareSet", 2);
-    formData.append("Amount", input);
+    formData.append("Set_Name", "set2");
+    formData.append("qty", input);
 
-    fetch("/check_in_Hw", { method: "POST", body: formData })
+    fetch("http://localhost:5000/check_in_Hw", {
+      method: "POST",
+      body: formData,
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -61,10 +67,13 @@ function HwSets(props) {
     console.log(input);
 
     const formData = new FormData();
-    formData.append("HardwareSet", 1);
-    formData.append("Amount", input);
+    formData.append("Set_Name", "set1");
+    formData.append("qty", input);
 
-    fetch("/check_out_Hw", { method: "POST", body: formData })
+    fetch("http://localhost:5000/check_out_Hw", {
+      method: "POST",
+      body: formData,
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -82,10 +91,13 @@ function HwSets(props) {
     console.log(input);
 
     const formData = new FormData();
-    formData.append("HardwareSet", 2);
-    formData.append("Amount", input);
+    formData.append("Set_Name", "set2");
+    formData.append("qty", input);
 
-    fetch("/check_out_Hw", { method: "POST", body: formData })
+    fetch("http://localhost:5000/check_out_Hw", {
+      method: "POST",
+      body: formData,
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
