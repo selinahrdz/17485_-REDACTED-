@@ -205,14 +205,9 @@ def checkOut():
     #     return {'status': 'error', 'message': 'Please log in or sign up.', }
 
 
-@app.route("/SetInit", methods=['POST'])
-def SetInit():
-    response = ''
-    # if 'username' in session:
-    #     username = session['username']
-    return {'Set1': "Set1", 'qty1': 100, 'Set2': "Set2", 'qty2': 100}
-    # else:
-    #     return {'status': 'error', 'message': 'Please log in or sign up.', }
+@app.route("/getSets", methods=['POST'])
+def getSets():
+    return Helpers.getSets()
 
 
 if __name__ == "__main__":

@@ -208,4 +208,10 @@ def checkOut(username, HWSet, qty):  # Returns Json
     else:
         return {'message': 'Not Enough Hardware', }
 
+
+def getSets():
+    set1A = hw_set_collection.find_one({'Name': 'set1'})['Availability']
+    set2A = hw_set_collection.find_one({'Name': 'set2'})['Availability']
+    return {'set1': set1A, 'set2': set2A}
+
 # END OF HWSET RELATED FUNCTIONS

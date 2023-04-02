@@ -55,7 +55,9 @@ function HwSets(props) {
         console.log(data);
         setShowNotification(true);
         setNotification(data["message"]);
+        if(data["message"] == ("success")){
         setHWSet2Data(Number(data["Availability"]));
+
       })
       .catch((error) => console.log(error));
     hw2Input.current.value = null;
