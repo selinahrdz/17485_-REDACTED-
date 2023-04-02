@@ -12,6 +12,10 @@ project_collection = db.Projects
 hw_set_collection = db.HWSet
 
 
+def clearDatabase():
+    client.drop_database('Management')
+
+
 # USER VALIDATION
 def encrypt(passw):
     encrypt = ""
@@ -64,6 +68,7 @@ def sign_up(userID, username, password):
     else:
         return {'message': 'Username exists already.', }
 
+
 # END OF USER VALIDATION
 
 
@@ -77,7 +82,7 @@ def project_in_user_projects(project_ID, user_projects):
 
 
 def get_projects(username):
-    print("reached get_projects helper boss, current user is"+ username)
+    print("reached get_projects helper boss, current user is" + username)
     user_project = user_collection.find_one({'Username': username})['Projects']
     json_user_projects = json.loads(jsonMaker.MongoJSONEncoder().encode(user_project))
     user_projects = []
@@ -176,7 +181,7 @@ def checkIn(username, HWSet, qty):  # Returns Json
         if setAval + qty <= setCap:
             user_projects[i] = user_projects[i] - qty
             setAval = setAval + qty
-            user_collection.update_one({'Username': username}, {'$set' : {'Sets': user_projects}})
+            user_collection.update_one({'Username': username}, {'$set': {'Sets': user_projects}})
             hw_set_collection.update_one({'Name': HWSet}, {'$set': {'Availability': setAval}})
             return {'message': 'Success', 'Set_Name': HWSet, 'Availability': setAval}
         else:
@@ -191,7 +196,7 @@ def checkOut(username, HWSet, qty):  # Returns Json
     if HWSet == "set2":
         i = 1
 
-    setAval = hw_set_collection.find_one({'Name': HWSet})['Availability'] #bug here
+    setAval = hw_set_collection.find_one({'Name': HWSet})['Availability']  # bug here
     setAval = int(setAval)
     qty = int(qty)
     if setAval - qty >= 0:
