@@ -10,8 +10,6 @@ function ProjectBox(props) {
     const formData2 = new FormData();
     formData2.append("Set_Name", "set1");
     formData2.append("qty", 0);
-    formData2.append("Access-Control-Allow-Origin", "http://localhost:5000");
-    formData2.append("Access-Control-Allow-Credentials", "true");
 
     fetch("http://localhost:5000/check_out_Hw", {
       method: "POST",
@@ -31,8 +29,6 @@ function ProjectBox(props) {
     const formData2 = new FormData();
     formData2.append("Set_Name", "set1");
     formData2.append("qty", 0);
-    formData2.append("Access-Control-Allow-Origin", "http://localhost:5000");
-    formData2.append("Access-Control-Allow-Credentials", "true");
 
     fetch("http://localhost:5000/check_out_Hw", {
       method: "POST",
@@ -48,6 +44,13 @@ function ProjectBox(props) {
     return Availability2;
   }
 
+  initializeHWSet1();
+  initializeHWSet2();
+
+  function testLeave() {
+    console.log("hello");
+  }
+
   return (
     <>
       <div className="container card mt-2 pt-0 pr-5">
@@ -59,7 +62,7 @@ function ProjectBox(props) {
             <button
               type="button"
               className="btn btn-danger"
-              onClick={() => props.leaveHandler(id_num)}
+              onClick={() => testLeave()}
             >
               Leave Project
             </button>

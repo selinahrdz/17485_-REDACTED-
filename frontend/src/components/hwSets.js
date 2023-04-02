@@ -70,6 +70,7 @@ function HwSets(props) {
         setShowNotification(true);
         setNotification(data["message"]);
         setHWSet1Data(Number(data["Availability"]));
+        window.location.reload();
       })
       .catch((error) => console.log(error));
 
@@ -94,6 +95,7 @@ function HwSets(props) {
         setShowNotification(true);
         setNotification(data["message"]);
         setHWSet2Data(Number(data["Availability"]));
+        window.location.reload();
       })
       .catch((error) => console.log(error));
     hw2Input.current.value = null;
@@ -118,6 +120,7 @@ function HwSets(props) {
         setShowNotification(true);
         setNotification(data["message"]);
         setHWSet1Data(Number(data["Availability"]));
+        window.location.reload();
       })
       .catch((error) => console.log(error));
 
@@ -142,6 +145,7 @@ function HwSets(props) {
         setShowNotification(true);
         setNotification(data["message"]);
         setHWSet2Data(Number(data["Availability"]));
+        window.location.reload();
       })
       .catch((error) => console.log(error));
 

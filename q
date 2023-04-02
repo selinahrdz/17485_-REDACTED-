@@ -1,0 +1,258 @@
+[33mcommit 56a9db72446e5d65c65c5811e7348884352fb573[m[33m ([m[1;36mHEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: Rodney Bradford Deransburg <70783787+DarkenedAsian@users.noreply.github.com>
+Date:   Sun Apr 2 17:02:08 2023 -0500
+
+    initialize HWSets/ need tosync sets across diff projects now
+
+[33mcommit 9421497fd0eee3b6c43c5bc7b8b78946ee08171c[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: johnlu48 <johnlu46@gmail.com>
+Date:   Sun Apr 2 15:16:37 2023 -0500
+
+    Clear Database
+
+[33mcommit c83ef9baccb2af1e69b3bd737d388b1a34fe7192[m
+Author: johnlu48 <johnlu46@gmail.com>
+Date:   Sun Apr 2 15:16:09 2023 -0500
+
+    Clear Database
+
+[33mcommit 558d9912d33e9a71f81e518c17b02a9fa1b75957[m
+Author: johnlu48 <johnlu46@gmail.com>
+Date:   Sun Apr 2 15:13:14 2023 -0500
+
+    Finished checkout
+
+[33mcommit 7f2bc7cd22c5add7024383a8dd8decc20511dd84[m
+Author: Rodney Bradford Deransburg <70783787+DarkenedAsian@users.noreply.github.com>
+Date:   Sat Apr 1 19:07:25 2023 -0500
+
+    backend receives chkin/chkout rqsts + need to debug Helpers.py
+
+[33mcommit ad8cf8d96797f779591a248e900c89f571351bfa[m
+Merge: 7c73e68 10a528f
+Author: Frankie <frankie.ortiz2001@gmail.com>
+Date:   Fri Mar 31 21:26:10 2023 -0500
+
+    Merge branch 'main' of https://github.com/selinahrdz/17485_-REDACTED-
+
+[33mcommit 7c73e68c1bb110a7997ed6204003a5a63f8a2b9c[m
+Author: Frankie <frankie.ortiz2001@gmail.com>
+Date:   Fri Mar 31 21:26:00 2023 -0500
+
+    "join-project,variable projects rendered"
+
+[33mcommit 10a528fdb4750ef3f4e76095485a61b2be1a893d[m
+Author: Zhien Lu <johnlu46@gmail.com>
+Date:   Fri Mar 31 17:22:28 2023 -0500
+
+    Updated Files
+
+[33mcommit b7822e449b53c3a53f616def2b730980ba287f36[m
+Author: Zhien Lu <johnlu46@gmail.com>
+Date:   Fri Mar 31 14:03:38 2023 -0500
+
+    Updated Files
+
+[33mcommit 70d7593812d4b458849b5796302604048fc4c27a[m
+Merge: d7af605 1fa4fc8
+Author: Zhien Lu <johnlu46@gmail.com>
+Date:   Thu Mar 30 17:04:05 2023 -0500
+
+    Merge remote-tracking branch 'origin/main'
+    
+    # Conflicts:
+    #       frontend/src/pages/UserProjects.js
+
+[33mcommit d7af6053443bb3ac99742a60fc899a552ec393dc[m
+Author: Zhien Lu <johnlu46@gmail.com>
+Date:   Thu Mar 30 17:03:40 2023 -0500
+
+    Updated Files
+
+[33mcommit 1fa4fc8b4d69a5633a55436ff6c41735e4df417c[m
+Author: Alexis Torres <alexistorres@utexas.edu>
+Date:   Thu Mar 30 15:55:34 2023 -0500
+
+    placeholder
+
+[33mcommit 0582f88a2b96dc3f9a1689d9e80fd861e95e2a39[m
+Author: Zhien Lu <johnlu46@gmail.com>
+Date:   Wed Mar 29 17:57:38 2023 -0500
+
+    Updated Files
+
+[33mcommit 9eb30c3506bf367463d99fdac663a44a713dce9c[m
+Author: Zhien Lu <johnlu46@gmail.com>
+Date:   Wed Mar 29 17:57:04 2023 -0500
+
+    Updated Files
+
+[33mcommit 1343ed8980fb29b5f77ce75fc796491ff1f419ee[m
+Author: Alexis Torres <alexistorres@utexas.edu>
+Date:   Tue Mar 28 00:06:57 2023 -0500
+
+    Added More Componets
+
+[33mcommit bb9f804379e7cc7130ea84458610d4f727a197ed[m
+Author: Alexis Torres <alexistorres@utexas.edu>
+Date:   Mon Mar 27 04:53:32 2023 -0500
+
+    Very SImple Pages, Need Modal and Project
+
+[33mcommit 93b58bf9d21e263169b81a42c89ec6208083b431[m
+Author: Alexis Torres <alexistorres@utexas.edu>
+Date:   Mon Mar 27 03:08:38 2023 -0500
+
+    Working on Front End, Projects and Join/Create
+
+[33mcommit 91fe6a18322c97d5e38026bcf705266814f6d8cc[m
+Author: Alexis Torres <alexistorres@utexas.edu>
+Date:   Sun Mar 26 23:38:37 2023 -0500
+
+    Freeze of Requirements
+
+[33mcommit 9bf8b7892af41f4df7f65ed935270d0dd78d816a[m
+Author: Alexis Torres <alexistorres@utexas.edu>
+Date:   Sun Mar 26 23:25:37 2023 -0500
+
+    Code Clean Up
+
+[33mcommit cfdb88c408defeced97a44598319b64f85d2ba6e[m
+Author: Alexis Torres <alexistorres@utexas.edu>
+Date:   Sun Mar 26 22:44:03 2023 -0500
+
+    Defined App Routes, Helper Funtion for tasks
+
+[33mcommit db4b7ded13f201c4aa1402c08cda51258f1c814c[m
+Author: Alexis Torres <alexistorres@utexas.edu>
+Date:   Sun Mar 26 16:11:31 2023 -0500
+
+    Big File Renaming and Reorganizing
+
+[33mcommit 5e01e48288a92b89096368226ef14665b5920731[m
+Author: Alexis Torres <alexistorres@utexas.edu>
+Date:   Sun Mar 26 14:10:01 2023 -0500
+
+    Double Checking backend is the same
+
+[33mcommit 81f81aa920b327c2e77348df1705cbb769576181[m
+Author: Alexis Torres <alexistorres@utexas.edu>
+Date:   Sun Mar 26 14:00:30 2023 -0500
+
+    adding components
+
+[33mcommit 26a9a6d557ab9c2b5be6a90ab716bc09e9e9aa06[m
+Merge: 1a9e494 d4a451f
+Author: Alexis Torres <alexistorres@utexas.edu>
+Date:   Sun Mar 26 13:58:57 2023 -0500
+
+    Fixing Files
+
+[33mcommit 1a9e494c92058e1ee58ef843e6fed35e15180cc1[m
+Author: Alexis Torres <alexistorres@utexas.edu>
+Date:   Sun Mar 26 13:51:38 2023 -0500
+
+    Merging file
+
+[33mcommit 88575ced2c4c1c9fd64d2222cee6b47a7d6237c2[m
+Author: Alexis Torres <alexistorres@utexas.edu>
+Date:   Sun Mar 26 13:33:06 2023 -0500
+
+    File Clean up
+
+[33mcommit cc9c9aae82dbeb03eb1531632e9defb2c3b55133[m
+Author: Alexis Torres <alexistorres@utexas.edu>
+Date:   Sun Mar 26 13:32:32 2023 -0500
+
+    FrontEnd file updated
+
+[33mcommit d4a451f3e468a3c78262ff190bb171c800b6dee9[m
+Merge: a0e6865 1ac9aa6
+Author: Selina Hernandez <selinah2002@utexas.edu>
+Date:   Sun Mar 26 13:03:33 2023 -0500
+
+    Merge branch 'main' of https://github.com/selinahrdz/17485_-REDACTED-
+
+[33mcommit a0e6865de26f44849098692a0e4823f62ed566f1[m
+Author: Selina Hernandez <selinah2002@utexas.edu>
+Date:   Sun Mar 26 13:02:11 2023 -0500
+
+    added usermanagement
+
+[33mcommit 1ac9aa6b1d69951b8b7e82c124ff38c6c2aa6a2a[m
+Author: Zhien Lu <johnlu46@gmail.com>
+Date:   Fri Mar 24 15:04:00 2023 -0500
+
+    Updated Files
+
+[33mcommit 33f2b17024e4e5e2c5db07d77d10c160343603b1[m
+Author: Zhien Lu <johnlu46@gmail.com>
+Date:   Thu Mar 23 17:16:35 2023 -0500
+
+    Updated Files
+
+[33mcommit 17c63dd626a131741cde405396f38c92c99cc097[m
+Author: Zhien Lu <johnlu46@gmail.com>
+Date:   Thu Mar 23 16:35:11 2023 -0500
+
+    Updated Files
+
+[33mcommit 49e211221325a97e0f2524cfab788c7809630f52[m
+Author: Zhien Lu <johnlu46@gmail.com>
+Date:   Wed Mar 22 16:32:12 2023 -0500
+
+    Updated Files
+
+[33mcommit 6ef7e248018adf136dbac736bcca1e2a7f717bdf[m
+Author: Alexis Torres <alexistorres@utexas.edu>
+Date:   Mon Mar 20 17:01:14 2023 -0500
+
+    Added/Rearranged React Comps, Working on Flask
+
+[33mcommit 916672dcdf8246e1894b6ebb103e0d4b9e2f0cbd[m
+Author: Selina Hernandez <selinah2002@utexas.edu>
+Date:   Thu Mar 2 16:52:33 2023 -0600
+
+    Front End First Commit
+
+[33mcommit acef8aeeacd2aa97939886b989e2be73f90607d5[m
+Author: Zhien Lu <johnlu46@gmail.com>
+Date:   Thu Mar 2 16:36:08 2023 -0600
+
+    Updated Files
+
+[33mcommit 68e5cf04aef20fb6e12d1b3cd63edf315ca9a07c[m
+Author: Zhien Lu <johnlu46@gmail.com>
+Date:   Mon Feb 27 14:13:01 2023 -0600
+
+    Updated Files
+
+[33mcommit a67c87a7832bb7ee6b8bffe3febce9c44c027194[m
+Author: johnlu48 <johnlu46@gmail.com>
+Date:   Fri Feb 24 19:02:26 2023 -0600
+
+    Set up server for backend
+
+[33mcommit 536b229bfc3323c3ac7b9d51b8cc502279732f35[m
+Author: johnlu48 <johnlu46@gmail.com>
+Date:   Fri Feb 24 18:09:42 2023 -0600
+
+    Send information to database
+
+[33mcommit ac7d5a9df23aa370768a58d210e27836c6a15a87[m
+Author: Zhien Lu <johnlu46@gmail.com>
+Date:   Thu Feb 23 16:16:40 2023 -0600
+
+    Updated Files
+
+[33mcommit 93791a58c2bef7e023e9a691201f247e53078b9a[m
+Author: Zhien Lu <johnlu46@gmail.com>
+Date:   Thu Feb 23 15:50:35 2023 -0600
+
+    Updated Files
+
+[33mcommit 346563de44b9785e45a788377ed927c3ca4f1f9c[m
+Author: johnlu48 <92693868+johnlu48@users.noreply.github.com>
+Date:   Thu Feb 23 15:37:03 2023 -0600
+
+    Initial
