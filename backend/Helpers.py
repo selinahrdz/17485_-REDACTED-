@@ -162,6 +162,8 @@ def create_project(username, project_name, project_description):
 # HWSET RELATED FUNCTIONS
 
 def checkIn(username, HWSet, qty):  # Returns Json
+    print("hi")
+    qty = int(qty)
     user_projects = user_collection.find_one({'Username': username})['Sets']
     i = 0
     if HWSet == "set2":
@@ -174,13 +176,13 @@ def checkIn(username, HWSet, qty):  # Returns Json
         if setAval + qty <= setCap:
             user_projects[i] = user_projects[i] - qty
             setAval = setAval + qty
-            user_collection.update_one({'Username': username}, {'Sets': user_projects})
-            hw_set_collection.update_one({'Name': HWSet}, {'Availability': setAval})
-            return {'Message': 'Success', 'Set_Name': HWSet, 'Availability': setAval}
+            user_collection.update_one({'Username': username}, {'$set' : {'Sets': user_projects}})
+            hw_set_collection.update_one({'Name': HWSet}, {'$set': {'Availability': setAval}})
+            return {'message': 'Success', 'Set_Name': HWSet, 'Availability': setAval}
         else:
-            return {'Message': 'Hardware Set at full capacity', }
+            return {'message': 'Hardware Set at full capacity', }
     else:
-        return {'Message': 'User does not have enough hardware to check in', }
+        return {'message': 'User does not have enough hardware to check in', }
 
 
 def checkOut(username, HWSet, qty):  # Returns Json
@@ -195,10 +197,10 @@ def checkOut(username, HWSet, qty):  # Returns Json
     if setAval - qty >= 0:
         user_projects[i] = user_projects[i] + qty
         setAval = setAval - qty
-        user_collection.update_one({'Username': username}, {'Sets': user_projects})
-        hw_set_collection.update_one({'Name': HWSet}, {'Availability': setAval})
-        return {'Message': 'Success', 'Set_Name': HWSet, 'Availability': setAval}
+        user_collection.update_one({'Username': username}, {'$set': {'Sets': user_projects}})
+        hw_set_collection.update_one({'Name': HWSet}, {'$set': {'Availability': setAval}})
+        return {'message': 'Success', 'Set_Name': HWSet, 'Availability': setAval}
     else:
-        return {'Message': 'Not Enough Hardware', }
+        return {'message': 'Not Enough Hardware', }
 
 # END OF HWSET RELATED FUNCTIONS

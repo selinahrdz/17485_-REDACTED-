@@ -173,15 +173,16 @@ def hello():
 
 @app.route("/check_in_Hw", methods=['POST'])
 def checkIn():
+    print("Received")
     response = ''
     # if 'username' in session:
     #     username = session['username']
-    set_name = request.form['Set_Name']
+    set_name = request.form['Set_name']
     qty = request.form['qty']
     print('received qty is' + qty)
     print('receieved set_name is' + set_name)
     response = Helpers.checkIn(username, set_name, qty)
-    print("The response is " + response)
+    print(response)
     return response
     # else:
     #     return {'status': 'error', 'message': 'Please log in or sign up.', }
@@ -197,7 +198,7 @@ def checkOut():
     #username = 'test' #just testing api without logging/program doesnt know what username
     print("this is set_name " + set_name + " this is qty " + qty + " this is username " + username)
     response = Helpers.checkOut(username, set_name, qty)
-    print("The response is " + response)
+    print(response)
     return response
     # else:
     #     return {'status': 'error', 'message': 'Please log in or sign up.', }

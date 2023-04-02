@@ -27,13 +27,13 @@ function HwSets(props) {
     })
       .then((response) => response.json())
       .then((data) => {
+      alert(data["message"]);
         console.log(data);
         setShowNotification(true);
         setNotification(data["message"]);
+        setHWSet1Data(Number(data["Availability"]));
       })
       .catch((error) => console.log(error));
-
-    setHWSet1Data(Number(HWSet1Data) - Number(input));
 
     hw1Input.current.value = null;
   }
@@ -55,10 +55,9 @@ function HwSets(props) {
         console.log(data);
         setShowNotification(true);
         setNotification(data["message"]);
+        setHWSet2Data(Number(data["Availability"]));
       })
       .catch((error) => console.log(error));
-
-    setHWSet1Data(Number(HWSet2Data) - Number(input));
     hw2Input.current.value = null;
   }
 
@@ -76,13 +75,15 @@ function HwSets(props) {
     })
       .then((response) => response.json())
       .then((data) => {
+      alert(data["message"]);
         console.log(data);
         setShowNotification(true);
         setNotification(data["message"]);
+        setHWSet1Data(Number(data["Availability"]));
       })
       .catch((error) => console.log(error));
 
-    setHWSet1Data(Number(HWSet1Data) + Number(input));
+
     hw1Input.current.value = null;
   }
 
@@ -103,10 +104,10 @@ function HwSets(props) {
         console.log(data);
         setShowNotification(true);
         setNotification(data["message"]);
+        setHWSet2Data(Number(data["Availability"]));
       })
       .catch((error) => console.log(error));
 
-    setHWSet1Data(Number(HWSet2Data) + Number(input));
     hw2Input.current.value = null;
   }
   function showNotificationModal() {
