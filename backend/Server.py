@@ -11,7 +11,7 @@ app.secret_key = "This Is The Key"
 CORS(app)
 
 # user = Driver.Driver()
-Helpers.clearDatabase()
+#Helpers.clearDatabase()
 set1 = HWSet.HWSet()
 set2 = HWSet.HWSet()
 set1.initialize("set1", 100)

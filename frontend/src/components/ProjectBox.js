@@ -2,6 +2,7 @@ import React from "react";
 import HwSets from "./hwSets";
 
 function ProjectBox(props) {
+  console.log(props.projName);
   const id_num = props.id;
   let Availability1 = 0;
   let Availability2 = 0;
@@ -44,10 +45,25 @@ function ProjectBox(props) {
     return Availability2;
   }
 
-
   initializeHWSet1();
   initializeHWSet2();
 
+  function leaveProject(name) {
+    console.log("leave clicked");
+    const formData2 = new FormData();
+    formData2.append("Project_ID", name);
+
+    fetch("http://localhost:5000/leave_project", {
+      method: "POST",
+      body: formData2,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        window.location.reload();
+      })
+      .catch((error) => console.log(error));
+  }
 
   return (
     <>
@@ -60,7 +76,7 @@ function ProjectBox(props) {
             <button
               type="button"
               className="btn btn-danger"
-           //   onClick={() => testLeave()}
+              onClick={() => leaveProject(props.projName)}
             >
               Leave Project
             </button>

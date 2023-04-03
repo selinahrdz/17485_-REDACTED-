@@ -153,8 +153,14 @@ def join_project_by_id(username, projectID):
 
 
 def leave_project(username, projectID):
-    user_projects = user_collection.find_one({'Username': username})['Projects']
+    print("username is " + username)
+    print("projectID is " + projectID)
+    user_projects = user_collection.find_one({'Username': username})
+    print(user_projects)
+    projects = user_projects['Projects']
+    #print(projects)
     leave = project_collection.find_one({'Name': projectID})
+    print(leave)
     authorized_users = leave['Authorized_Users']
 
     if username in authorized_users and username is not None:

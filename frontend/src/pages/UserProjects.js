@@ -15,24 +15,22 @@ function UserProjects() {
         console.log(data);
         setLoaded(true);
         setUserProjectArray(data);
-
       })
       .catch((err) => console.log(err));
   }, []);
 
   if (loaded) {
-   // alert("found projects");
+    // alert("found projects");
     if (userProjectArray.length > 0) {
-      alert("user has "+ userProjectArray.length + " projects");
+      alert("user has " + userProjectArray.length + " projects");
       return (
-        
         <>
           <NavBar />
           <div>
             <div>
-            {userProjectArray.map((proj) => (
-              <ProjectBox />
-            ))}
+              {userProjectArray.map((proj) => (
+                <ProjectBox projName={proj.Name} id={proj._id} />
+              ))}
             </div>
             {/* {userProjectArray &&
               userProjectArray.map((project) => {
@@ -59,7 +57,8 @@ function UserProjects() {
       <>
         <NavBar />
         <div className="text-center">
-          FAILED TO LOAD PROJECTS. EITHER YOU HAVE NO PROJECTS, OR THE SYSTEM IS DOWN
+          FAILED TO LOAD PROJECTS. EITHER YOU HAVE NO PROJECTS, OR THE SYSTEM IS
+          DOWN
         </div>
       </>
     );
