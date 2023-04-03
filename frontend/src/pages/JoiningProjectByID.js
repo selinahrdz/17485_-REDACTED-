@@ -13,19 +13,19 @@ function JoiningProjectByID() {
     //console.log(username);
 
     let form = new FormData();
-    alert(Data.projectId);
+    //alert(Data.projectId);
     form.append("Project_ID", Data.projectId);
     e.target.reset();
 
-    alert(form.get('Project_ID'));
+    //alert(form.get('Project_ID'));
 
     fetch("http://localhost:5000/join_project", { method: "POST", body: form })
       .then((response) => response.json())
       .then((data) => {
-        alert(data["message"]);
         if (data["message"] == "Project joined.") {
           move("/my_projects");
         } else {
+            alert(data["message"])
           //Place Holder for Modal
         }
         console.log(Data);

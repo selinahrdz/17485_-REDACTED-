@@ -74,7 +74,6 @@ def sign_up(userID, username, password):
 
 # PROJECT RELATED FUNCTIONS
 def project_in_user_projects(project_ID, user_projects):
-    print(user_projects)
     for projects in user_projects:
         user_project_id = str(projects['Name'])
         if user_project_id == project_ID:
@@ -83,13 +82,10 @@ def project_in_user_projects(project_ID, user_projects):
 
 
 def get_projects(username):
-    print("reached get_projects helper boss, current user is" + username)
     user_project = user_collection.find_one({'Username': username})['Projects']
     json_user_projects = json.loads(jsonMaker.MongoJSONEncoder().encode(user_project))
     user_projects = []
     for project in json_user_projects:
-        print(type(project))
-        print(project['Name'])
         actualProject = project_collection.find_one({'Name': project['Name']})  # '_id':ObjectId(project[1] - this is the ID that MongoDB assigs to the project
         user_projects.append(json.loads(jsonMaker.MongoJSONEncoder().encode(actualProject)))
     return user_projects
@@ -111,7 +107,6 @@ def join_project(username, projectID):
 
 
 def join_project_by_id(username, projectID):
-    print("you made it v2")
     # if ObjectId.is_valid(project_ID):
     #     user_projects = user_collection.find_one({'Username': username})['Projects']
     #     project_joining = project_collection.find_one({'_id': ObjectId(project_ID)})
@@ -153,16 +148,10 @@ def join_project_by_id(username, projectID):
 
 
 def leave_project(username, projectID):
-    print("username is " + username)
-    print("projectID is " + projectID)
+
     user_projects = user_collection.find_one({'Username': username})
-    print(user_projects)
     projects = user_projects['Projects']
-    print("_____________")
-    print(projects)
-    print("++++++++++++++")
     leave = project_collection.find_one({'Name': projectID})
-    print(type(leave))
     nametoLeave = leave['Name']
     authorized_users = leave['Authorized_Users']
 
@@ -181,7 +170,6 @@ def create_project(username, project_name, project_description):
                       "Authorized_Users": [username],
                       }
         project_ID = project_collection.insert_one(newProject).inserted_id
-        print(username, project_name, project_description)
         join_project(username, project_name)
         return {'Message': 'Project created.', }
     else:
@@ -194,7 +182,6 @@ def create_project(username, project_name, project_description):
 # HWSET RELATED FUNCTIONS
 
 def checkIn(username, HWSet, qty):  # Returns Json
-    print("hi")
     qty = int(qty)
     user_projects = user_collection.find_one({'Username': username})['Sets']
     i = 0

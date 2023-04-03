@@ -65,24 +65,27 @@ function HwSets(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        alert(data["message"]);
         console.log(data);
-        setShowNotification(true);
-        setNotification(data["message"]);
-        setHWSet1Data(Number(data["Availability"]));
-        window.location.reload();
+        if(data["message"] == "Success"){
+            setHWSet1Data(Number(data["Availability"]));
+            window.location.reload();
+        }
+        else{
+          alert(data['message'])
+        }
+
       })
       .catch((error) => console.log(error));
 
     hw1Input.current.value = null;
   }
 
-  function checkInHW2(e) {
+  function checkInHW2() {
     const input = hw2Input.current.value;
     console.log(input);
 
     const formData = new FormData();
-    formData.append("Set_Name", "set2");
+    formData.append("Set_name", "set2");
     formData.append("qty", input);
 
     fetch("http://localhost:5000/check_in_Hw", {
@@ -92,12 +95,16 @@ function HwSets(props) {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        setShowNotification(true);
-        setNotification(data["message"]);
-        setHWSet2Data(Number(data["Availability"]));
-        window.location.reload();
+        if(data["message"] == "Success"){
+            setHWSet2Data(Number(data["Availability"]));
+            window.location.reload();
+        }
+        else{
+           alert(data['message'])
+        }
       })
       .catch((error) => console.log(error));
+
     hw2Input.current.value = null;
   }
 
@@ -115,12 +122,14 @@ function HwSets(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        alert(data["message"]);
         console.log(data);
-        setShowNotification(true);
-        setNotification(data["message"]);
-        setHWSet1Data(Number(data["Availability"]));
-        window.location.reload();
+        if(data["message"] == "Success"){
+            setHWSet1Data(Number(data["Availability"]));
+            window.location.reload();
+        }
+        else{
+            alert(data['message'])
+        }
       })
       .catch((error) => console.log(error));
 
@@ -142,10 +151,13 @@ function HwSets(props) {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        setShowNotification(true);
-        setNotification(data["message"]);
-        setHWSet2Data(Number(data["Availability"]));
-        window.location.reload();
+        if(data["message"] == "Success"){
+            setHWSet2Data(Number(data["Availability"]));
+            window.location.reload();
+        }
+        else{
+           alert(data['message'])
+        }
       })
       .catch((error) => console.log(error));
 

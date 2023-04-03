@@ -21,7 +21,6 @@ function CreateProject() {
     fetch("http://localhost:5000/create_project", { method: "POST", body: form })
       .then((response) => response.json())
       .then((data) => {
-      alert(data["Message"]);
         if (data["Message"] == "Project created.") {
           move("/my_projects");
         } else {

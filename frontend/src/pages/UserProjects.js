@@ -22,7 +22,7 @@ function UserProjects() {
   if (loaded) {
     // alert("found projects");
     if (userProjectArray.length > 0) {
-      alert("user has " + userProjectArray.length + " projects");
+      //alert("user has " + userProjectArray.length + " projects");
       return (
         <>
           <NavBar />
@@ -46,7 +46,8 @@ function UserProjects() {
         <>
           <NavBar />
           <div className="text-center">
-            PROJECTS FOUND. WAITING ON PROJECT COMPONENT IMPLEMENTATION
+            FAILED TO LOAD PROJECTS. EITHER YOU HAVE NO PROJECTS, OR THE SYSTEM IS
+            DOWN
           </div>
         </>
       );
