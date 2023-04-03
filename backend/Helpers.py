@@ -158,17 +158,20 @@ def leave_project(username, projectID):
     user_projects = user_collection.find_one({'Username': username})
     print(user_projects)
     projects = user_projects['Projects']
-    #print(projects)
+    print("_____________")
+    print(projects)
+    print("++++++++++++++")
     leave = project_collection.find_one({'Name': projectID})
-    print(leave)
+    print(type(leave))
+    nametoLeave = leave['Name']
     authorized_users = leave['Authorized_Users']
 
     if username in authorized_users and username is not None:
         authorized_users.remove(username)  # remove the username from the autho user of the project
         project_collection.update_one({'Name': projectID}, {'$set': {'Authorized_Users': authorized_users}})
-    if project_in_user_projects(projectID, user_projects) and leave is not None:
-        user_projects.remove(leave)  # remove the project from the project array of the user
-        user_collection.update_one({'Username': username}, {'$set': {'Projects': user_projects}})
+    if project_in_user_projects(projectID, projects) and leave is not None:
+        projects = [elem for elem in projects if elem['Name'] != nametoLeave]
+        user_collection.update_one({'Username': username}, {'$set': {'Projects': projects}})
 
 
 def create_project(username, project_name, project_description):

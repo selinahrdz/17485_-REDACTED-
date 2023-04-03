@@ -25,7 +25,7 @@ function CreateProject() {
         if (data["Message"] == "Project created.") {
           move("/my_projects");
         } else {
-          //Place Holder for Modal
+          alert(data["Message"])
         }
         console.log(Data);
       })

@@ -144,6 +144,7 @@ def join_project():
 @app.route("/leave_project", methods=['POST'])
 def leave_project():
     response = ''
+    print("____________________________")
     # if 'username' in session:
     #     username = session['username']
     project_ID = request.form['Project_ID']
