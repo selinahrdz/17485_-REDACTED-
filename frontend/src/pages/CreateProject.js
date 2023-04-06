@@ -29,11 +29,10 @@ function CreateProject() {
     })
       .then((response) => response.json())
       .then((data) => {
-        alert(data["Message"]);
         if (data["Message"] == "Project created.") {
           move("/my_projects");
         } else {
-          setNotification(data["message"]);
+          setNotification(data["Message"]);
           setShowNotification(true);
         }
         console.log(Data);

@@ -2,9 +2,47 @@ import NotiModal from "./notiModal";
 import React, { useState, useRef } from "react";
 
 function HwSets(props) {
+  //initialize HWSets
+  function initializeHWSet1() {
+    const formData2 = new FormData();
+    formData2.append("Set_Name", "set1");
+    formData2.append("qty", 0);
+
+    fetch("http://localhost:5000/check_out_Hw", {
+      method: "POST",
+      body: formData2,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setHWSet1Data(Number(data["Availability"]));
+      })
+      .catch((error) => console.log(error));
+  }
+
+  function initializeHWSet2() {
+    const formData3 = new FormData();
+    formData3.append("Set_Name", "set2");
+    formData3.append("qty", 0);
+
+    fetch("http://localhost:5000/check_out_Hw", {
+      method: "POST",
+      body: formData3,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setHWSet2Data(Number(data["Availability"]));
+      })
+      .catch((error) => console.log(error));
+  }
+
+  initializeHWSet1();
+  initializeHWSet2();
+
   //Keeping Track of The Current Count
-  const [HWSet1Data, setHWSet1Data] = useState(0);
-  const [HWSet2Data, setHWSet2Data] = useState(0);
+  const [HWSet1Data, setHWSet1Data] = useState(props.HWSet1Data);
+  const [HWSet2Data, setHWSet2Data] = useState(props.HWSet2Data);
 
   //For Modal Notification
   const [showNotification, setShowNotification] = useState(false);
@@ -27,23 +65,26 @@ function HwSets(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        alert(data["message"]);
         console.log(data);
-        setShowNotification(true);
-        setNotification(data["message"]);
-        setHWSet1Data(Number(data["Availability"]));
+        if (data["message"] == "Success") {
+          setHWSet1Data(Number(data["Availability"]));
+          window.location.reload();
+        } else {
+          setNotification(data["message"]);
+          setShowNotification(true);
+        }
       })
       .catch((error) => console.log(error));
 
     hw1Input.current.value = null;
   }
 
-  function checkInHW2(e) {
+  function checkInHW2() {
     const input = hw2Input.current.value;
     console.log(input);
 
     const formData = new FormData();
-    formData.append("Set_Name", "set2");
+    formData.append("Set_name", "set2");
     formData.append("qty", input);
 
     fetch("http://localhost:5000/check_in_Hw", {
@@ -53,17 +94,20 @@ function HwSets(props) {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        setShowNotification(true);
-        setNotification(data["message"]);
-        if (data["message"] == "success") {
+        if (data["message"] == "Success") {
           setHWSet2Data(Number(data["Availability"]));
+          window.location.reload();
+        } else {
+          setNotification(data["message"]);
+          setShowNotification(true);
         }
       })
       .catch((error) => console.log(error));
+
     hw2Input.current.value = null;
   }
 
-  function checkOutHW1(e) {
+  function checkOutHW1() {
     const input = hw1Input.current.value;
     console.log(input);
 
@@ -77,18 +121,21 @@ function HwSets(props) {
     })
       .then((response) => response.json())
       .then((data) => {
-        alert(data["message"]);
         console.log(data);
-        setShowNotification(true);
-        setNotification(data["message"]);
-        setHWSet1Data(Number(data["Availability"]));
+        if (data["message"] == "Success") {
+          setHWSet1Data(Number(data["Availability"]));
+          window.location.reload();
+        } else {
+          setNotification(data["message"]);
+          setShowNotification(true);
+        }
       })
       .catch((error) => console.log(error));
 
     hw1Input.current.value = null;
   }
 
-  function checkOutHW2(e) {
+  function checkOutHW2() {
     const input = hw2Input.current.value;
     console.log(input);
 
@@ -103,9 +150,13 @@ function HwSets(props) {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        setShowNotification(true);
-        setNotification(data["message"]);
-        setHWSet2Data(Number(data["Availability"]));
+        if (data["message"] == "Success") {
+          setHWSet2Data(Number(data["Availability"]));
+          window.location.reload();
+        } else {
+          setNotification(data["message"]);
+          setShowNotification(true);
+        }
       })
       .catch((error) => console.log(error));
 

@@ -16,6 +16,8 @@ set1 = HWSet.HWSet()
 set2 = HWSet.HWSet()
 set1.initialize("set1", 100)
 set2.initialize("set2", 100)
+Helpers.sign_up("Person1", "Person1", "password")
+Helpers.sign_up("test", "test", "test")
 username = ""
 
 
@@ -78,14 +80,14 @@ def welcome_page():
 # Route for Login Page
 @app.route("/login", methods=['POST'])
 def log_on():
-    print("received")
+
     response = ''
     Username = request.form['Username']
     Password = request.form['Password']
     response = Helpers.sign_in(Username, Password)
     global username
     username = Username
-    print(username)
+
     # session['username'] = Username
     # print(session)
     return response  # This is a Json Response
@@ -94,7 +96,7 @@ def log_on():
 # Route for Sign Up Page
 @app.route("/create_account", methods=['POST'])
 def create_log_on():
-    print("hi")
+
     response = ''
     UserID = request.form['UserID']
     Username = request.form['Username']
@@ -108,10 +110,10 @@ def create_log_on():
 
 @app.route("/my_projects")
 def my_projects():
-    print("reached the function boss,")
+
     # if 'username' in session:
     #  username = session['username']
-    print(username)
+
     projects = Helpers.get_projects(username)
     return projects  # This is a Json Response
 
@@ -130,7 +132,7 @@ def my_projects():
 @app.route("/join_project", methods=['POST'])
 def join_project():
     response = ''
-    print("you made it")
+
     # if 'username' in session:
     #     username = session['username']
     project_ID = request.form['Project_ID']
@@ -144,6 +146,7 @@ def join_project():
 @app.route("/leave_project", methods=['POST'])
 def leave_project():
     response = ''
+
     # if 'username' in session:
     #     username = session['username']
     project_ID = request.form['Project_ID']
@@ -155,14 +158,14 @@ def leave_project():
 
 @app.route("/create_project", methods=['POST'])
 def create_project():
-    print(username)
+
     response = ''
     # if 'username' in session:
     #     username = session['username']
     project_name = request.form['Project_Name']
     project_description = request.form['Project_Description']
     response = Helpers.create_project(username, project_name, project_description)
-    print(response)
+
     return response
     # else:
     #     return {'status': 'error', 'message': 'Please log in or sign up.', }
@@ -174,16 +177,15 @@ def hello():
 
 @app.route("/check_in_Hw", methods=['POST'])
 def checkIn():
-    print("Received")
+
     response = ''
     # if 'username' in session:
     #     username = session['username']
     set_name = request.form['Set_name']
     qty = request.form['qty']
-    print('received qty is' + qty)
-    print('receieved set_name is' + set_name)
+
     response = Helpers.checkIn(username, set_name, qty)
-    print(response)
+
     return response
     # else:
     #     return {'status': 'error', 'message': 'Please log in or sign up.', }
@@ -197,9 +199,9 @@ def checkOut():
     set_name = request.form['Set_Name']
     qty = request.form['qty']
     #username = 'test' #just testing api without logging/program doesnt know what username
-    print("this is set_name " + set_name + " this is qty " + qty + " this is username " + username)
+
     response = Helpers.checkOut(username, set_name, qty)
-    print(response)
+
     return response
     # else:
     #     return {'status': 'error', 'message': 'Please log in or sign up.', }

@@ -60,8 +60,10 @@ class HWSet:
         self.update_database()
 
     def update_database(self):
-        client = MongoClient("mongodb+srv://test:test@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
-        #client = MongoClient("mongodb+srv://frankieortiz2001:Volcano11s11@cluster0.uoazbvh.mongodb.net/?retryWrites=true&w=majority")
+        # to access the database w/o certifi add this: &tlsAllowInvalidCertificates=true at the end of url
+        client = MongoClient(
+            "mongodb+srv://test:test@cluster0.xylfgq2.mongodb.net/?retryWrites=true&w=majority")
+        # client = MongoClient("mongodb+srv://frankieortiz2001:Volcano11s11@cluster0.uoazbvh.mongodb.net/?retryWrites=true&w=majority")
 
         db = client["Management"]
         collection = db.HWSet

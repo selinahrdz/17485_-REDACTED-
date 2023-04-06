@@ -28,10 +28,10 @@ function Login() {
     fetch("http://localhost:5000/login", { method: "POST", body: form })
       .then((response) => response.json())
       .then((data) => {
-        alert(data["message"]);
         if (data["message"] == "Authorized") {
           move("/my_projects");
         } else {
+          //alert(data["message"]);
           setNotification(data["message"]);
           setShowNotification(true);
         }

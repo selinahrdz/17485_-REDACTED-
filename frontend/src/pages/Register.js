@@ -74,7 +74,7 @@ function Register() {
                   <input
                     type="text"
                     className="form-control mx-sm-3"
-                    id="firstname"
+                    id="userID"
                     placeholder="User ID"
                     onChange={(e) => handler(e)}
                     required

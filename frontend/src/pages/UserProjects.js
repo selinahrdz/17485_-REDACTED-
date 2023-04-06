@@ -21,14 +21,14 @@ function UserProjects() {
   if (loaded) {
     // alert("found projects");
     if (userProjectArray.length > 0) {
-      alert("user has " + userProjectArray.length + " projects");
+      //alert("user has " + userProjectArray.length + " projects");
       return (
         <>
           <NavBar />
           <div>
             <div>
               {userProjectArray.map((proj) => (
-                <ProjectBox />
+                <ProjectBox projName={proj.Name} id={proj._id} />
               ))}
             </div>
             {/* {userProjectArray &&
@@ -40,22 +40,21 @@ function UserProjects() {
         </>
       );
     } else {
-      //NEED A PLACEHOLDER FOR WHEN THE LIST IS EMPTY
       return (
         <>
           <NavBar />
-          <div className="text-center mt-5">
-            PROJECTS FOUND. WAITING ON PROJECT COMPONENT IMPLEMENTATION
+          <div className="text-center">
+            FAILED TO LOAD PROJECTS. EITHER YOU HAVE NO PROJECTS, OR THE SYSTEM
+            IS DOWN
           </div>
         </>
       );
     }
   } else {
-    //NEED A PLACEHOLDER FOR WHEN THE LIST IS EMPTY
     return (
       <>
         <NavBar />
-        <div className="text-center mt-5">
+        <div className="text-center">
           FAILED TO LOAD PROJECTS. EITHER YOU HAVE NO PROJECTS, OR THE SYSTEM IS
           DOWN
         </div>
