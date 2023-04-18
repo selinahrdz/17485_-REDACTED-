@@ -8,7 +8,7 @@ function UserProjects() {
 
   useEffect(() => {
     // alert("userprojects_test");
-    fetch("http://localhost:5000/my_projects")
+    fetch("/my_projects")
       .then((rep) => rep.json())
       .then((data) => {
         console.log(data);

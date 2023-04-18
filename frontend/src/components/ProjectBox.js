@@ -12,7 +12,7 @@ function ProjectBox(props) {
     formData2.append("Set_Name", "set1");
     formData2.append("qty", 0);
 
-    fetch("http://localhost:5000/check_out_Hw", {
+    fetch("/check_out_Hw", {
       method: "POST",
       body: formData2,
     })
@@ -31,7 +31,7 @@ function ProjectBox(props) {
     formData2.append("Set_Name", "set1");
     formData2.append("qty", 0);
 
-    fetch("http://localhost:5000/check_out_Hw", {
+    fetch("/check_out_Hw", {
       method: "POST",
       body: formData2,
     })
@@ -53,7 +53,7 @@ function ProjectBox(props) {
     const formData2 = new FormData();
     formData2.append("Project_ID", name);
 
-    fetch("http://localhost:5000/leave_project", {
+    fetch("/leave_project", {
       method: "POST",
       body: formData2,
     })

@@ -28,7 +28,7 @@ function Register() {
 
     e.target.reset();
 
-    fetch("http://localhost:5000/create_account", {
+    fetch("/create_account", {
       method: "POST",
       body: form,
     })

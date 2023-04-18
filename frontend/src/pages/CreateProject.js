@@ -23,7 +23,7 @@ function CreateProject() {
     form.append("Project_Description", Data.ProjectDescription);
     e.target.reset();
 
-    fetch("http://localhost:5000/create_project", {
+    fetch("/create_project", {
       method: "POST",
       body: form,
     })

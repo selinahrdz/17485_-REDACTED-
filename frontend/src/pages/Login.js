@@ -25,7 +25,7 @@ function Login() {
     form.append("Username", Data.user);
     form.append("Password", Data.pass);
 
-    fetch("http://localhost:5000/login", { method: "POST", body: form })
+    fetch("/login", { method: "POST", body: form })
       .then((response) => response.json())
       .then((data) => {
         if (data["message"] == "Authorized") {

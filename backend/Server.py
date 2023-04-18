@@ -11,13 +11,13 @@ app.secret_key = "This Is The Key"
 CORS(app)
 
 # user = Driver.Driver()
-Helpers.clearDatabase()
-set1 = HWSet.HWSet()
-set2 = HWSet.HWSet()
-set1.initialize("set1", 100)
-set2.initialize("set2", 100)
-Helpers.sign_up("Person1", "Person1", "password")
-Helpers.sign_up("test", "test", "test")
+# Helpers.clearDatabase()
+# set1 = HWSet.HWSet()
+# set2 = HWSet.HWSet()
+# set1.initialize("set1", 100)
+# set2.initialize("set2", 100)
+# Helpers.sign_up("Person1", "Person1", "password")
+# Helpers.sign_up("test", "test", "test")
 username = ""
 
 
@@ -164,11 +164,13 @@ def create_project():
     #     username = session['username']
     project_name = request.form['Project_Name']
     project_description = request.form['Project_Description']
-    response = Helpers.create_project(username, project_name, project_description)
+    response = Helpers.create_project(
+        username, project_name, project_description)
 
     return response
     # else:
     #     return {'status': 'error', 'message': 'Please log in or sign up.', }
+
 
 @app.route('/hello')
 def hello():
@@ -198,7 +200,7 @@ def checkOut():
     #     username = session['username']
     set_name = request.form['Set_Name']
     qty = request.form['qty']
-    #username = 'test' #just testing api without logging/program doesnt know what username
+    # username = 'test' #just testing api without logging/program doesnt know what username
 
     response = Helpers.checkOut(username, set_name, qty)
 

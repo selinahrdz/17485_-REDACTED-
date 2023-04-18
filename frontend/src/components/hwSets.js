@@ -8,7 +8,7 @@ function HwSets(props) {
     formData2.append("Set_Name", "set1");
     formData2.append("qty", 0);
 
-    fetch("http://localhost:5000/check_out_Hw", {
+    fetch("/check_out_Hw", {
       method: "POST",
       body: formData2,
     })
@@ -25,7 +25,7 @@ function HwSets(props) {
     formData3.append("Set_Name", "set2");
     formData3.append("qty", 0);
 
-    fetch("http://localhost:5000/check_out_Hw", {
+    fetch("/check_out_Hw", {
       method: "POST",
       body: formData3,
     })
@@ -59,7 +59,7 @@ function HwSets(props) {
     formData.append("Set_name", "set1");
     formData.append("qty", input);
 
-    fetch("http://localhost:5000/check_in_Hw", {
+    fetch("/check_in_Hw", {
       method: "POST",
       body: formData,
     })
@@ -87,7 +87,7 @@ function HwSets(props) {
     formData.append("Set_name", "set2");
     formData.append("qty", input);
 
-    fetch("http://localhost:5000/check_in_Hw", {
+    fetch("/check_in_Hw", {
       method: "POST",
       body: formData,
     })
@@ -115,7 +115,7 @@ function HwSets(props) {
     formData.append("Set_Name", "set1");
     formData.append("qty", input);
 
-    fetch("http://localhost:5000/check_out_Hw", {
+    fetch("/check_out_Hw", {
       method: "POST",
       body: formData,
     })
@@ -143,7 +143,7 @@ function HwSets(props) {
     formData.append("Set_Name", "set2");
     formData.append("qty", input);
 
-    fetch("http://localhost:5000/check_out_Hw", {
+    fetch("/check_out_Hw", {
       method: "POST",
       body: formData,
     })
