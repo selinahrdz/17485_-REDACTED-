@@ -82,7 +82,7 @@ function CreateProject() {
                     id="ProjectDescription"
                     onChange={(e) => handler(e)}
                     type="username"
-                    placeholder="Project ID"
+                    placeholder="Project Description"
                     className="form-control mx-sm-3"
                     required
                   />

@@ -30,7 +30,8 @@ function JoiningProjectByID() {
         if (data["message"] == "Project joined.") {
           move("/my_projects");
         } else {
-          alert(data["message"]);
+          setNotification(data["message"]);
+          setShowNotification(true);
           //Place Holder for Modal
         }
         console.log(Data);
@@ -67,12 +68,12 @@ function JoiningProjectByID() {
             <div className="card px-5 py-5">
               <form className="form-inline" onSubmit={DataToBackend}>
                 <div className="forms-inputs mb-4">
-                  <label className="inputPassword6 ">Project ID</label>
+                  <label className="inputPassword6 ">Project Name</label>
                   <input
                     id="projectId"
                     onChange={(e) => handler(e)}
                     type="username"
-                    placeholder="Project ID"
+                    placeholder="Project Name"
                     className="form-control mx-sm-3"
                     required
                   />
